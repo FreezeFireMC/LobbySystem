@@ -8,4 +8,9 @@ public class LobbySystem extends JavaPlugin {
     public void onEnable() {
         super.onEnable();
     }
+
+    @Override
+    public void onDisable() {
+        super.onDisable();
+    }
 }
