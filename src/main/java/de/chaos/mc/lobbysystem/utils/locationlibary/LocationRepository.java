@@ -61,6 +61,9 @@ public class LocationRepository implements LocationInterface {
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
+        if (locationDAO == null) {
+            return null;
+        }
         Location location = new Location(Bukkit.getWorld(locationDAO.getWorld()), locationDAO.getX(), locationDAO.getY(), locationDAO.getZ());
         return location;
     }

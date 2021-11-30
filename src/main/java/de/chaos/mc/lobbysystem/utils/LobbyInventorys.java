@@ -12,15 +12,19 @@ public class LobbyInventorys {
             player1.teleport(LobbySystem.getLocationInterface().getLocation("GunGame"));
             player1.closeInventory();
         });
-        menu.additem(10, new ItemBuilder(Material.GRASS).name("§6CityBuild").itemStack(), player1 -> {
+        menu.additem(8, new ItemBuilder(Material.GRASS).name("§6CityBuild").itemStack(), player1 -> {
             player1.teleport(LobbySystem.getLocationInterface().getLocation("CityBuild"));
             player1.closeInventory();
         });
-        menu.additem(15, new ItemBuilder(Material.NETHER_STAR).name("§6Spawn").itemStack(), player1 -> {
+        menu.additem(22, new ItemBuilder(Material.NETHER_STAR).name("§6Spawn").itemStack(), player1 -> {
             player1.teleport(LobbySystem.getLocationInterface().getLocation("Spawn"));
             player1.closeInventory();
         });
-        menu.additem(22, new ItemBuilder(Material.IRON_SWORD).name("§6SkyWars").itemStack(), player1 -> {
+        menu.additem(37, new ItemBuilder(Material.IRON_SWORD).name("§6SkyWars").itemStack(), player1 -> {
+            player1.teleport(LobbySystem.getLocationInterface().getLocation("SkyWars"));
+            player1.closeInventory();
+        });
+        menu.additem(44, new ItemBuilder(Material.IRON_SWORD).name("§6SkyWars").itemStack(), player1 -> {
             player1.teleport(LobbySystem.getLocationInterface().getLocation("SkyWars"));
             player1.closeInventory();
         });
