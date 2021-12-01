@@ -20,7 +20,7 @@ public class setLocation implements CommandExecutor {
                     if (LobbySystem.getLocationInterface().getLocation(mapname) != null) {
                         LobbySystem.getLocationInterface().delLocation("mapname");
                     }
-                    LobbySystem.getLocationInterface().addLocation("mapname", player.getLocation());
+                    LobbySystem.getLocationInterface().addLocation(mapname, player.getLocation());
                 } else {
                     player.sendMessage(DefaultMessages.wrongSyntax("/setLocation [LocationName]"));
                 }

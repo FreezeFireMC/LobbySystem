@@ -43,6 +43,8 @@ public class LocationRepository implements LocationInterface {
                 .x((long) location.getX())
                 .y((long) location.getY())
                 .z((long) location.getZ())
+                .pitch((long) location.getPitch())
+                .yaw((long) location.getYaw())
                 .build();
         try {
             daoManager.getDAO().createOrUpdate(locationDAO);
@@ -65,6 +67,8 @@ public class LocationRepository implements LocationInterface {
             return null;
         }
         Location location = new Location(Bukkit.getWorld(locationDAO.getWorld()), locationDAO.getX(), locationDAO.getY(), locationDAO.getZ());
+        location.setPitch(locationDAO.getPitch());
+        location.setY(location.getYaw());
         return location;
     }
 

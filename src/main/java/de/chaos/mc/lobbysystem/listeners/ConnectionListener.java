@@ -1,5 +1,6 @@
 package de.chaos.mc.lobbysystem.listeners;
 
+import de.chaos.mc.lobbysystem.LobbySystem;
 import de.chaos.mc.lobbysystem.utils.ItemBuilder;
 import de.chaos.mc.serverapi.utils.stringLibary.DefaultMessages;
 import org.bukkit.GameMode;
@@ -18,6 +19,10 @@ public class ConnectionListener implements Listener {
         player.setGameMode(GameMode.ADVENTURE);
         player.getInventory().clear();
         player.getInventory().setItem(0, new ItemBuilder(Material.COMPASS).name("§6Navigator").itemStack());
+        if (LobbySystem.getLocationInterface().getLocation("Spawn") != null) {
+            player.teleport(LobbySystem.getLocationInterface().getLocation("Spawn"));
+        }
+
     }
 
     @EventHandler

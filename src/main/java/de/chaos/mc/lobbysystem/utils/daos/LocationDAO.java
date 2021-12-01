@@ -13,16 +13,15 @@ import lombok.NoArgsConstructor;
 @Builder
 @DatabaseTable(tableName = "LobbyLocations")
 public class LocationDAO {
-    public static final String ID_FIELD = "ID";
     public static final String NAME_FIELD  = "NAME";
     public static final String WORLD_FIELD  = "WORLD";
     public static final String X_FIELD  = "X";
     public static final String Y_FIELD  = "Y";
     public static final String Z_FIELD = "Z";
+    public static final String PITCH_FIELD = "PITCH";
+    public static final String YAW_FIELD = "YAW";
 
-    @DatabaseField(generatedId = true, columnName = ID_FIELD)
-    public int id;
-    @DatabaseField(columnName = NAME_FIELD)
+    @DatabaseField(id = true, columnName = NAME_FIELD)
     public String Name;
     @DatabaseField(columnName = WORLD_FIELD)
     public String World;
@@ -32,4 +31,8 @@ public class LocationDAO {
     public long y;
     @DatabaseField(columnName = Z_FIELD)
     public long z;
+    @DatabaseField(columnName = PITCH_FIELD)
+    public long pitch;
+    @DatabaseField(columnName = Y_FIELD)
+    public long yaw;
 }

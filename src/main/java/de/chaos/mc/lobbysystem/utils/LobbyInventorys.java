@@ -2,6 +2,7 @@ package de.chaos.mc.lobbysystem.utils;
 
 import de.chaos.mc.lobbysystem.LobbySystem;
 import de.chaos.mc.lobbysystem.utils.megaUtils.menu.Menu;
+import de.chaos.mc.serverapi.utils.stringLibary.DefaultMessages;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -20,12 +21,12 @@ public class LobbyInventorys {
             player1.teleport(LobbySystem.getLocationInterface().getLocation("Spawn"));
             player1.closeInventory();
         });
-        menu.additem(37, new ItemBuilder(Material.IRON_SWORD).name("§6SkyWars").itemStack(), player1 -> {
+        menu.additem(36, new ItemBuilder(Material.IRON_SWORD).name("§6SkyWars").itemStack(), player1 -> {
             player1.teleport(LobbySystem.getLocationInterface().getLocation("SkyWars"));
             player1.closeInventory();
         });
-        menu.additem(44, new ItemBuilder(Material.IRON_SWORD).name("§6SkyWars").itemStack(), player1 -> {
-            player1.teleport(LobbySystem.getLocationInterface().getLocation("SkyWars"));
+        menu.additem(44, new ItemBuilder(Material.SKULL_ITEM, 1, 3).skullOwner("ChaosNeko").name("§6Bald...").itemStack(), player1 -> {
+            player1.sendMessage(DefaultMessages.normalMessage("Kommt bald..."));
             player1.closeInventory();
         });
         menu.openInventory(player);
