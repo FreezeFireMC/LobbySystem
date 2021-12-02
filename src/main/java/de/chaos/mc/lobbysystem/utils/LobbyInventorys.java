@@ -31,4 +31,38 @@ public class LobbyInventorys {
         });
         menu.openInventory(player);
     }
+    public static void setMainCosmeticInventory(Player player) {
+        Menu menu = LobbySystem.menuFactory.createMenu(27, "§6Cosmetics");
+        menu.addSubmenu(11, new ItemBuilder(Material.LEATHER_CHESTPLATE).name("§cRüstung").itemStack(), getArmourMenu());
+        menu.addSubmenu(15, new ItemBuilder(Material.SKULL_ITEM, 1 ,3).skullOwner(player.getName()).name("§6Köpfe").itemStack(), getHeadMenu());
+        menu.openInventory(player);
+    }
+
+    public static Menu getArmourMenu() {
+        Menu menu = LobbySystem.menuFactory.createMenu(27, "§6Rüstung");
+        return menu;
+    }
+    public static Menu getHeadMenu() {
+        Menu menu = LobbySystem.menuFactory.createMenu(27, "§6Köpfe");
+        menu.additem(10, new ItemBuilder(Material.SKULL_ITEM, 1, 3).skullOwner("GommeHD").name("§6GommeHD´s Kopd").itemStack(), player -> {
+                    player.getInventory().setHelmet(new ItemBuilder(Material.SKULL_ITEM, 1, 3).skullOwner("GommeHD").name("§6GommeHD´s Kopd").itemStack());
+            player.sendMessage(DefaultMessages.normalMessage("Dein Kopf wurde geändert!"));
+                });
+
+        menu.additem(11, new ItemBuilder(Material.SKULL_ITEM, 1, 3).name("§6BastiGHG´s Kopf").skullOwner("BastiGHG").itemStack(), player -> {
+            player.getInventory().setHelmet(new ItemBuilder(Material.SKULL_ITEM, 1, 3).name("§6BastiGHG´s Kopf").skullOwner("BastiGHG").itemStack());
+            player.sendMessage(DefaultMessages.normalMessage("Dein Kopf wurde geändert!"));
+        });
+        menu.additem(2, new ItemBuilder(Material.SKULL_ITEM, 1, 3).name("§6BastiGHG´s Kopf").skullOwner("BastiGHG").itemStack(), player -> {
+            player.getInventory().setHelmet(new ItemBuilder(Material.SKULL_ITEM, 1, 3).name("§6BastiGHG´s Kopf").skullOwner("BastiGHG").itemStack());
+            player.sendMessage(DefaultMessages.normalMessage("Dein Kopf wurde geändert!"));
+        });
+        menu.additem(26, new ItemBuilder(Material.BARRIER).name("§cKopf entfernen...").itemStack(), player -> {
+            player.getInventory().setHelmet(null);
+            player.sendMessage(DefaultMessages.normalMessage("Dein Kopf wurde entfernt!"));
+        });
+
+        return menu;
+    }
+
 }

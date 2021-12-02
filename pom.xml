@@ -110,7 +110,7 @@
         <dependency>
             <groupId>com.github.FreezeFireMC</groupId>
             <artifactId>ServerAPI</artifactId>
-            <version>8bfbb60</version>
+            <version>782be5a458</version>
         </dependency>
     </dependencies>
 </project>

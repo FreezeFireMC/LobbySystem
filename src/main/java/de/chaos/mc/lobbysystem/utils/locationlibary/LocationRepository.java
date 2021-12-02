@@ -68,7 +68,7 @@ public class LocationRepository implements LocationInterface {
         }
         Location location = new Location(Bukkit.getWorld(locationDAO.getWorld()), locationDAO.getX(), locationDAO.getY(), locationDAO.getZ());
         location.setPitch(locationDAO.getPitch());
-        location.setY(location.getYaw());
+        location.setYaw(location.getYaw());
         return location;
     }
 

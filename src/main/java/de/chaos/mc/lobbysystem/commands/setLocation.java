@@ -14,7 +14,7 @@ public class setLocation implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (player.hasPermission(String.valueOf(Permissions.SETSPAWN))) {
+            if (player.hasPermission(String.valueOf(Permissions.SETLOCATION))) {
                 if (args.length == 1) {
                     String mapname = args[0];
                     if (LobbySystem.getLocationInterface().getLocation(mapname) != null) {

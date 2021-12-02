@@ -1,8 +1,8 @@
 package de.chaos.mc.lobbysystem.utils.stringUtils;
 
 public enum Permissions {
-    SETSPAWN("LobbySystem.setSpawn"),
-    SETLOCATION("LobbySystem.setLocation");
+    SETLOCATION("LobbySystem.setLocation"),
+    SICHTBARKEITVIP("LobbySystem.VIP");
 
     public String string;
     private Permissions(String permission) {

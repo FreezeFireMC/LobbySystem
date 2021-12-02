@@ -33,6 +33,6 @@ public class LocationDAO {
     public long z;
     @DatabaseField(columnName = PITCH_FIELD)
     public long pitch;
-    @DatabaseField(columnName = Y_FIELD)
+    @DatabaseField(columnName = YAW_FIELD)
     public long yaw;
 }
