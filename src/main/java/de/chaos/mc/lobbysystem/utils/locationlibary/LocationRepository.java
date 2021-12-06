@@ -37,15 +37,8 @@ public class LocationRepository implements LocationInterface {
 
     @Override
     public Location addLocation(String Locationname, Location location) {
-        LocationDAO locationDAO = LocationDAO.builder()
-                .Name(Locationname)
-                .World(location.getWorld().getName())
-                .x((long) location.getX())
-                .y((long) location.getY())
-                .z((long) location.getZ())
-                .pitch((long) location.getPitch())
-                .yaw((long) location.getYaw())
-                .build();
+        LocationDAO locationDAO = LocationDAO.builder().Name(Locationname).World(location.getWorld().getName()).
+                x((long) location.getX()).y((long) location.getY()).z((long) location.getZ()).pitch((long) location.getPitch()).yaw((long) location.getYaw()).build();
         try {
             daoManager.getDAO().createOrUpdate(locationDAO);
         } catch (SQLException exception) {
@@ -63,9 +56,7 @@ public class LocationRepository implements LocationInterface {
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
-        if (locationDAO == null) {
-            return null;
-        }
+        if (locationDAO == null) return null;
         Location location = new Location(Bukkit.getWorld(locationDAO.getWorld()), locationDAO.getX(), locationDAO.getY(), locationDAO.getZ());
         location.setPitch(locationDAO.getPitch());
         location.setYaw(location.getYaw());

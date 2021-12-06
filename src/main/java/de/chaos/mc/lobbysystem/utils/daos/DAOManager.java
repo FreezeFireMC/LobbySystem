@@ -25,9 +25,7 @@ public  class DAOManager<DaoType, KeyType> {
 
 
     public Dao<DaoType, KeyType> getDAO() throws SQLException {
-        if (dao == null) {
-            dao = DaoManager.createDao(connectionSource, daoType);
-        }
+        if (dao == null) dao = DaoManager.createDao(connectionSource, daoType);
         if (!tablesCreated) {
             if (!dao.isTableExists()) {
                 TableUtils.createTableIfNotExists(connectionSource, daoType);

@@ -12,23 +12,15 @@ import org.bukkit.event.player.PlayerToggleFlightEvent;
 public class DoubleJumpListener implements Listener {
     @EventHandler
     public void setVelocity(PlayerToggleFlightEvent event) {
-
         event.setCancelled(true);
-
         System.out.println("Flight toggled");
 
         Player player = event.getPlayer();
-        if (player.getLocation().subtract(0, 10, 0).getBlock().getType().equals(Material.AIR)) {
-            return;
-        }
+        if (player.getLocation().subtract(0, 10, 0).getBlock().getType().equals(Material.AIR)) return;
 
 
-        if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR || player.isFlying()) {
-
-            return;
-
-        } else {
-
+        if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR || player.isFlying()) return;
+        else {
             player.setAllowFlight(false);
             player.setFlying(false);
 

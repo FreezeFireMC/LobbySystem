@@ -10,10 +10,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Reflections {
-	
-	public Reflections() {
-		
-	}
 
 	private String OBC_PREFIX = Bukkit.getServer().getClass().getPackage().getName();
 	private String NMS_PREFIX = OBC_PREFIX.replace("org.bukkit.craftbukkit", "net.minecraft.server");
@@ -29,19 +25,15 @@ public class Reflections {
 			String variable = matcher.group(1);
 			String replacement;
 
-			if ("nms".equalsIgnoreCase(variable))
-				replacement = NMS_PREFIX;
-			else if ("obc".equalsIgnoreCase(variable))
-				replacement = OBC_PREFIX;
-			else if ("version".equalsIgnoreCase(variable))
-				replacement = VERSION;
-			else
-				throw new IllegalArgumentException("Unknown variable: " + variable);
+			if ("nms".equalsIgnoreCase(variable)) replacement = NMS_PREFIX;
+			else if ("obc".equalsIgnoreCase(variable)) replacement = OBC_PREFIX;
+			else if ("version".equalsIgnoreCase(variable)) replacement = VERSION;
+			else throw new IllegalArgumentException("Unknown variable: " + variable);
 
-			if (replacement.length() > 0 && matcher.end() < name.length() && name.charAt(matcher.end()) != '.')
-				replacement += ".";
+			if (replacement.length() > 0 && matcher.end() < name.length() && name.charAt(matcher.end()) != '.') replacement += ".";
 			matcher.appendReplacement(output, Matcher.quoteReplacement(replacement));
 		}
+
 		matcher.appendTail(output);
 		return output.toString();
 	}
@@ -79,8 +71,7 @@ public class Reflections {
 				};
 			}
 		}
-		throw new IllegalStateException(
-				String.format("Unable to find constructor for %s (%s).", clazz, Arrays.asList(params)));
+		throw new IllegalStateException(String.format("Unable to find constructor for %s (%s).", clazz, Arrays.asList(params)));
 	}
 
 	public Class<?> getCraftBukkitClass(String name) {
@@ -105,8 +96,7 @@ public class Reflections {
 
 	private <T> FieldAccessor<T> getField(Class<?> target, String name, Class<T> fieldType, int index) {
 		for (final Field field : target.getDeclaredFields()) {
-			if ((name == null || field.getName().equals(name)) && fieldType.isAssignableFrom(field.getType())
-					&& index-- <= 0) {
+			if ((name == null || field.getName().equals(name)) && fieldType.isAssignableFrom(field.getType()) && index-- <= 0) {
 				field.setAccessible(true);
 
 				return new FieldAccessor<T>() {
@@ -138,8 +128,7 @@ public class Reflections {
 		}
 
 		// Search in parent classes
-		if (target.getSuperclass() != null)
-			return getField(target.getSuperclass(), name, fieldType, index);
+		if (target.getSuperclass() != null) return getField(target.getSuperclass(), name, fieldType, index);
 		throw new IllegalArgumentException("Cannot find field with type " + fieldType);
 	}
 
@@ -152,9 +141,7 @@ public class Reflections {
 	}
 
 	public Method getMethodSimply(Class<?> clazz, String method) {
-		for (Method m : clazz.getMethods())
-			if (m.getName().equals(method))
-				return m;
+		for (Method m : clazz.getMethods()) if (m.getName().equals(method)) return m;
 		return null;
 	}
 
@@ -162,8 +149,7 @@ public class Reflections {
 		return getCanonicalClass(NMS_PREFIX + "." + name);
 	}
 
-	public MethodInvoker getTypedMethod(Class<?> clazz, String methodName, Class<?> returnType,
-			Class<?>... params) {
+	public MethodInvoker getTypedMethod(Class<?> clazz, String methodName, Class<?> returnType, Class<?>... params) {
 		for (final Method method : clazz.getDeclaredMethods()) {
 			if ((methodName == null || method.getName().equals(methodName)) && (returnType == null)
 					|| method.getReturnType().equals(returnType) && Arrays.equals(method.getParameterTypes(), params)) {
@@ -182,8 +168,7 @@ public class Reflections {
 			}
 		}
 
-		if (clazz.getSuperclass() != null)
-			return getMethod(clazz.getSuperclass(), methodName, params);
+		if (clazz.getSuperclass() != null) return getMethod(clazz.getSuperclass(), methodName, params);
 		throw new IllegalStateException(
 				String.format("Unable to find method %s (%s).", methodName, Arrays.asList(params)));
 	}

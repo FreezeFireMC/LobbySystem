@@ -34,21 +34,14 @@ class MenuListener implements Listener {
 	@EventHandler
 	public void onDrop(final PlayerDropItemEvent e) {
 		Player p = e.getPlayer();
-
-		if (openedMenus.containsKey(p)) {
-			e.setCancelled(true);
-		}
+		if (openedMenus.containsKey(p)) e.setCancelled(true);
 	}
 
 	@EventHandler
 	public void onInventoryClose(InventoryCloseEvent e) {
-
 		if (e.getPlayer() instanceof Player) {
 			Player p = (Player) e.getPlayer();
-
-			if (openedMenus.containsKey(p)) {
-				openedMenus.remove(p);
-			}
+			if (openedMenus.containsKey(p)) openedMenus.remove(p);
 		}
 	}
 

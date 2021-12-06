@@ -13,15 +13,11 @@ import java.util.function.Consumer;
 public class Menu {
 
 	protected List<MenuItem> items = new ArrayList<>();
-
 	protected int size;
 
 	private String title;
-
 	protected MenuListener listener;
-
 	private InventoryType inventoryType;
-
 	private Inventory inv;
 
 	protected Menu(int size, String title, MenuListener lister) {
@@ -54,27 +50,16 @@ public class Menu {
 	}
 
 	public void openInventory(Player p) {
-		if (inventoryType == null) {
-			inv = Bukkit.createInventory(null, size, title);
-		} else {
-			inv = Bukkit.createInventory(null, inventoryType, title);
-		}
+		if (inventoryType == null) inv = Bukkit.createInventory(null, size, title);
+		else inv = Bukkit.createInventory(null, inventoryType, title);
 
-		items.forEach(i -> {
-			inv.setItem(i.getSlot(), i.getItemStack());
-		});
-
+		items.forEach(i -> inv.setItem(i.getSlot(), i.getItemStack()));
 		p.openInventory(inv);
-
 		listener.openMenu(p, this);
 	}
 
 	public void updateInventoryItems(Player p) {
-
-		items.forEach(i -> {
-			inv.setItem(i.getSlot(), i.getItemStack());
-		});
-
+		items.forEach(i -> inv.setItem(i.getSlot(), i.getItemStack()));
 //		p.openInventory(inv);
 	}
 
@@ -82,9 +67,7 @@ public class Menu {
 		ArrayList<MenuItem> list = new ArrayList<MenuItem>();
 		list.addAll(items);
 		list.forEach(i -> {
-			if (i.getSlot() == slot) {
-				i.click(p);
-			}
+			if (i.getSlot() == slot) i.click(p);
 		});
 	}
 	

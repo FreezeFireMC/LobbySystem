@@ -10,10 +10,6 @@ import java.util.Arrays;
 
 public class ItemStackFactory {
 	
-	public ItemStackFactory() {
-		
-	}
-	
 	public ItemStack createItemStack(Material material, String displayName, int amount, int data, String... lore) {
 		ItemStack itemStack = new ItemStack(material, amount, (short) data);
 		ItemMeta itemMeta = itemStack.getItemMeta();

@@ -21,6 +21,7 @@ public class ItemBuilder {
     public ItemBuilder(Material material, int amount, int shortID) {
         itemStack = new ItemStack(material, amount, (short) shortID);
     }
+
     public ItemBuilder name(String name) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(name);

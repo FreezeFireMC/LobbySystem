@@ -25,8 +25,6 @@ public class MenuItem {
 	}
 
 	public ItemStack getItemStack() {
-		
-		
 		return itemStack;
 	}
 
@@ -35,12 +33,8 @@ public class MenuItem {
 	}
 
 	public void click(Player p) {
-		if(callback != null) {
-			callback.accept(p);
-		}
+		if(callback != null) callback.accept(p);
 		
-		if(menu != null) {
-			menu.openInventory(p);
-		}
+		if(menu != null) menu.openInventory(p);
 	}
 }

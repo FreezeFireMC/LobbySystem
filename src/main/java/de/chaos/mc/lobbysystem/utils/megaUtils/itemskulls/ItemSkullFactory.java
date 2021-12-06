@@ -17,10 +17,6 @@ public class ItemSkullFactory {
 	private final Base64 base64 = new Base64();
 	Reflections itemSkullReflections = new Reflections();
 	
-	public ItemSkullFactory() {
-		
-	}
-	
 	public ItemStack createItemSkull(String url, String displayName, String... lore) {
 		GameProfile profile = new GameProfile(UUID.randomUUID(), UUID.randomUUID().toString());
         PropertyMap propertyMap = profile.getProperties();
