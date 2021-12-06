@@ -55,6 +55,10 @@
 
     <repositories>
         <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
             <id>papermc-repo</id>
             <url>https://papermc.io/repo/repository/maven-public/</url>
         </repository>
@@ -111,6 +115,11 @@
             <groupId>com.github.FreezeFireMC</groupId>
             <artifactId>ServerAPI</artifactId>
             <version>553245e</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.FreezeFireMC</groupId>
+            <artifactId>ServerAPI</artifactId>
+            <version>782be5a458</version>
         </dependency>
     </dependencies>
 </project>

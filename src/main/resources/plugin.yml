@@ -1,0 +1,12 @@
+name: LobbySystem
+main: de.chaos.mc.lobbysystem.LobbySystem
+author: Chaoshero5567
+version: 1.0
+api-version: 1.12.2
+depend:
+  - ServerAPI
+commands:
+  setSpawn:
+    usage: /setSpawn
+  setLocation:
+    usage: /setLocation [LocationName]
