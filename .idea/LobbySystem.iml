@@ -52,6 +52,6 @@
     <orderEntry type="library" name="Maven: junit:junit:4.10" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
     <orderEntry type="library" name="Maven: com.j256.ormlite:ormlite-core:5.7" level="project" />
-    <orderEntry type="library" name="Maven: com.github.FreezeFireMC:ServerAPI:553245e" level="project" />
+    <orderEntry type="library" name="Maven: com.github.FreezeFireMC:ServerAPI:782be5a458" level="project" />
   </component>
 </module>
