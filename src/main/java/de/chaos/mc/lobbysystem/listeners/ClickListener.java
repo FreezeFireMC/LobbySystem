@@ -21,31 +21,41 @@ public class ClickListener implements Listener {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
-            if (event.getItem().getType().equals(Material.COMPASS)) LobbyInventorys.setLobbyInventory(event.getPlayer());
-            if (event.getItem().getType().equals(Material.ENDER_CHEST)) LobbyInventorys.setMainCosmeticInventory(event.getPlayer());
+            if (event.getItem().getType().equals(Material.COMPASS)) {
+                LobbyInventorys.setLobbyInventory(event.getPlayer());
+            }
+            if (event.getItem().getType().equals(Material.ENDER_CHEST)) {
+                LobbyInventorys.setMainCosmeticInventory(event.getPlayer());
+            }
             if (event.getItem().getType().equals(Material.BLAZE_ROD)) {
                 SichtbarkeitsInterface sichtbarkeitsIntreface = LobbySystem.sichtbarkeitsIntreface;
                 if (sichtbarkeitsIntreface.getCurrentMode(uuid) != 2) {
                     sichtbarkeitsIntreface.updateCurrentMode(uuid, Math.addExact(sichtbarkeitsIntreface.getCurrentMode(uuid), 1));
                     if (sichtbarkeitsIntreface.getCurrentMode(uuid) == 1) {
                         for (Player all : Bukkit.getOnlinePlayers()) {
-                            if (player.hasPermission(String.valueOf(Permissions.SICHTBARKEITVIP))) player.showPlayer(LobbySystem.getLobbySystem(), all);
-                            else player.hidePlayer(LobbySystem.getLobbySystem(), all);
+                            if (player.hasPermission(String.valueOf(Permissions.VIPPERMISSIONS))) {
+                                player.showPlayer(LobbySystem.getLobbySystem(), all);
+                            } else {
+                                player.hidePlayer(LobbySystem.getLobbySystem(), all);
+                            }
                         }
-
                         sichtbarkeitsIntreface.updateCurrentMode(uuid, 1);
                         player.sendMessage(DefaultMessages.normalMessage("Du siehtst nur noch VIP Spieler"));
                     }
                     if (sichtbarkeitsIntreface.getCurrentMode(uuid) == 2) {
-                        for (Player all : Bukkit.getOnlinePlayers())
-                            if (player.hasPermission(String.valueOf(Permissions.SICHTBARKEITVIP))) player.hidePlayer(LobbySystem.getLobbySystem(), all);
-
+                        for (Player all : Bukkit.getOnlinePlayers()) {
+                            if (player.hasPermission(String.valueOf(Permissions.VIPPERMISSIONS))) {
+                                player.hidePlayer(LobbySystem.getLobbySystem(), all);
+                            }
+                        }
                         sichtbarkeitsIntreface.updateCurrentMode(uuid, 2);
                         player.sendMessage(DefaultMessages.normalMessage("Du siehtst keine Spieler mehr"));
                     }
                 } else {
                     sichtbarkeitsIntreface.updateCurrentMode(uuid, Math.addExact(sichtbarkeitsIntreface.getCurrentMode(uuid), 0));
-                    for (Player all : Bukkit.getOnlinePlayers()) player.showPlayer(LobbySystem.getLobbySystem(), all);
+                    for (Player all : Bukkit.getOnlinePlayers()) {
+                        player.showPlayer(LobbySystem.getLobbySystem(), all);
+                    }
                     player.sendMessage(DefaultMessages.normalMessage("Du siehtst nun alle Spieler!"));
                     sichtbarkeitsIntreface.updateCurrentMode(uuid, 0);
                 }

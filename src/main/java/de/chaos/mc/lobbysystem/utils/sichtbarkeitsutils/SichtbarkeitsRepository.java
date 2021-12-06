@@ -3,6 +3,7 @@ package de.chaos.mc.lobbysystem.utils.sichtbarkeitsutils;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import de.chaos.mc.lobbysystem.utils.daos.DAOManager;
 import de.chaos.mc.lobbysystem.utils.daos.HidePlayerDAO;
+import de.chaos.mc.lobbysystem.utils.daos.LocationDAO;
 
 import java.sql.SQLException;
 import java.util.UUID;
@@ -23,14 +24,18 @@ public class SichtbarkeitsRepository implements SichtbarkeitsInterface {
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
-        if (hidePlayerDAO == null) return 0;
+        if (hidePlayerDAO == null) {
+            return 0;
+        }
         return hidePlayerDAO.getMode();
     }
 
     @Override
     public void updateCurrentMode(UUID uuid, int mode) {
-        HidePlayerDAO hidePlayerDAO = HidePlayerDAO.builder().uuid(uuid).mode(mode).build();
-
+        HidePlayerDAO hidePlayerDAO = HidePlayerDAO.builder()
+                .uuid(uuid)
+                .mode(mode)
+                .build();
         try {
             daoManager.getDAO().createOrUpdate(hidePlayerDAO);
         } catch (SQLException exception) {

@@ -2,7 +2,7 @@ package de.chaos.mc.lobbysystem.utils.stringUtils;
 
 public enum Permissions {
     SETLOCATION("LobbySystem.setLocation"),
-    SICHTBARKEITVIP("LobbySystem.VIP");
+    VIPPERMISSIONS("LobbySystem.fire");
 
     public String string;
     private Permissions(String permission) {
