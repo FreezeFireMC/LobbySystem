@@ -37,8 +37,15 @@ public class LocationRepository implements LocationInterface {
 
     @Override
     public Location addLocation(String Locationname, Location location) {
-        LocationDAO locationDAO = LocationDAO.builder().Name(Locationname).World(location.getWorld().getName()).
-                x((long) location.getX()).y((long) location.getY()).z((long) location.getZ()).pitch((long) location.getPitch()).yaw((long) location.getYaw()).build();
+        LocationDAO locationDAO = LocationDAO.builder()
+                .Name(Locationname)
+                .World(location.getWorld().getName()).
+                x((long) location.getX())
+                .y((long) location.getY())
+                .z((long) location.getZ())
+                .pitch((long) location.getPitch())
+                .yaw((long) location.getYaw())
+                .build();
         try {
             daoManager.getDAO().createOrUpdate(locationDAO);
         } catch (SQLException exception) {

@@ -1,5 +1,6 @@
 package de.chaos.mc.lobbysystem.utils;
 
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -13,14 +14,13 @@ public class ItemBuilder {
     public ItemBuilder(Material material) {
         itemStack = new ItemStack(material);
     }
-
     public ItemBuilder(Material material, int amount) {
         itemStack = new ItemStack(material, amount);
     }
+    public ItemBuilder(Material material, int amount, int shortID) { itemStack = new ItemStack(material, amount, (short) shortID); }
+    public ItemBuilder(Material material, int amount, int shortID, DyeColor colour) { itemStack = new ItemStack(material, amount, (short) shortID, colour.getDyeData()); }
 
-    public ItemBuilder(Material material, int amount, int shortID) {
-        itemStack = new ItemStack(material, amount, (short) shortID);
-    }
+
 
     public ItemBuilder name(String name) {
         ItemMeta itemMeta = itemStack.getItemMeta();
@@ -58,6 +58,11 @@ public class ItemBuilder {
     public ItemBuilder setDurability(short durability) {
         itemStack.setDurability(durability);
         return this;
+    }
+
+    @Deprecated
+    public ItemBuilder setDyeColour(DyeColor dyeColour) {;
+        return null;
     }
 
     public ItemStack itemStack() {

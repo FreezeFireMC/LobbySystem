@@ -1,11 +1,12 @@
 package de.chaos.mc.lobbysystem.utils.stringUtils;
 
-public enum Permissions {
-    SETLOCATION("LobbySystem.setLocation"),
-    VIPPERMISSIONS("LobbySystem.fire");
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-    public String string;
-    private Permissions(String permission) {
-        this.string = permission;
-    }
+@AllArgsConstructor
+public enum Permissions {
+    SETLOCATION("FreezeFire.setLocation"),
+    VIPPERMISSIONS("FreezeFire.fire");
+
+    @Getter private String string;
 }

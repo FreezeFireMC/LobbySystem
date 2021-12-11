@@ -4,6 +4,9 @@ import de.chaos.mc.lobbysystem.LobbySystem;
 import de.chaos.mc.lobbysystem.utils.sichtbarkeitsutils.SichtbarkeitsInterface;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -19,6 +22,7 @@ import java.util.UUID;
 public class ScoreboardManager {
     private static SichtbarkeitsInterface sichtbarkeitsIntreface;
     public static HashMap<UUID, PlayerScorebaord> playerScorebaordHashMap;
+    public static HashMap<UUID, BossBar> bossBarHashMap;
     public ScoreboardManager(Plugin plugin) {
          playerScorebaordHashMap = new HashMap<>();
          this.sichtbarkeitsIntreface = LobbySystem.sichtbarkeitsIntreface;
@@ -88,7 +92,7 @@ public class ScoreboardManager {
         visibitlity.addEntry(ChatColor.RED.toString());
 
         objective.getScore("§0").setScore(6);
-        objective.getScore("§bCoins:").setScore(5);
+        objective.getScore("§cCoins:").setScore(5);
         objective.getScore(ChatColor.BLUE.toString()).setScore(4);
         objective.getScore("§1 ").setScore(3);
         objective.getScore("§cSichtbarkeit: ").setScore(2);
@@ -105,6 +109,14 @@ public class ScoreboardManager {
 
         playerScorebaordHashMap.put(player.getUniqueId(), playerScorebaord);
         player.setScoreboard(scoreboard);
+
+        BossBar bossBar = Bukkit.getServer().createBossBar("§bFreeze§cFire: §aOnline", BarColor.GREEN, BarStyle.SEGMENTED_20);
+        bossBar.setProgress(1);
+        bossBar.setTitle("§bFreeze§cFire: §aOnline");
+        bossBar.setVisible(true);
+        bossBar.addPlayer(player);
+        bossBarHashMap.put(player.getUniqueId(), bossBar);
+
         return scoreboard;
     }
 

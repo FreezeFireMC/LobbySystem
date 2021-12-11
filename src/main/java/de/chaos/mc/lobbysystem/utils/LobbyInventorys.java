@@ -40,7 +40,12 @@ public class LobbyInventorys {
     }
 
     public static Menu getArmourMenu() {
-        Menu menu = LobbySystem.menuFactory.createMenu(27, "§6Rüstung");
+        Menu menu = LobbySystem.menuFactory.createMenu(36, "§6Rüstung");
+        menu.additem(2, new ItemBuilder(Material.LEATHER_HELMET).name("§6Hut").unbreakable(true).itemStack(), player -> player.getInventory().setHelmet( new ItemBuilder(Material.LEATHER_HELMET).name("§6Hut").unbreakable(true).itemStack()));
+        menu.additem(3, new ItemBuilder(Material.CHAINMAIL_HELMET).name("§6Ketten Helm").unbreakable(true).itemStack(), player -> player.getInventory().setHelmet( new ItemBuilder(Material.CHAINMAIL_HELMET).name("§6Ketten Helm").unbreakable(true).itemStack()));
+        menu.additem(4, new ItemBuilder(Material.IRON_HELMET).name("§6Eisen Helm").unbreakable(true).itemStack(), player -> player.getInventory().setHelmet(new ItemBuilder(Material.IRON_HELMET).name("§6Eisen Helm").unbreakable(true).itemStack()));
+        menu.additem(5, new ItemBuilder(Material.GOLD_HELMET).name("§6Gold Helm").unbreakable(true).itemStack(), player -> player.getInventory().setHelmet(new ItemBuilder(Material.GOLD_HELMET).name("§6Gold Helm").unbreakable(true).itemStack()));
+        menu.additem(6, new ItemBuilder(Material.DIAMOND_HELMET).name("§6Diamand Helm").unbreakable(true).itemStack(), player -> player.getInventory().setHelmet( new ItemBuilder(Material.DIAMOND_HELMET).name("§6Diamand Helm").unbreakable(true).itemStack()));
         return menu;
     }
     public static Menu getHeadMenu(Player invplayer) {
@@ -74,9 +79,9 @@ public class LobbyInventorys {
                 player.sendMessage(DefaultMessages.NOPERMISSION);
             }
         });
-        menu.additem(15, new ItemBuilder(Material.SKULL_ITEM ,1 ,3).name("§6TNT").skullOwner("Nirz63").itemStack(), player -> {
+        menu.additem(15, new ItemBuilder(Material.TNT).name("§6TNT").itemStack(), player -> {
             if (player.hasPermission(String.valueOf(Permissions.VIPPERMISSIONS))) {
-                player.getInventory().setHelmet(new ItemBuilder(Material.SKULL_ITEM ,1 ,3).name("§6TNT").skullOwner("Nirz63").itemStack());
+                player.getInventory().setHelmet(new ItemBuilder(Material.TNT).name("§6TNT").itemStack());
                 player.sendMessage(DefaultMessages.normalMessage("Dein Kopf wurde geändert!"));
             } else {
                 player.sendMessage(DefaultMessages.NOPERMISSION);

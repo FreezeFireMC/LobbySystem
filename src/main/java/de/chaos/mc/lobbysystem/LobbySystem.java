@@ -2,18 +2,16 @@ package de.chaos.mc.lobbysystem;
 
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import de.chaos.mc.lobbysystem.commands.SetLocationCommand;
-import de.chaos.mc.lobbysystem.listeners.ClickListener;
-import de.chaos.mc.lobbysystem.listeners.ConnectionListener;
-import de.chaos.mc.lobbysystem.listeners.DoubleJumpListener;
-import de.chaos.mc.lobbysystem.listeners.InventoryClickListener;
+import de.chaos.mc.lobbysystem.listeners.*;
 import de.chaos.mc.lobbysystem.utils.locationlibary.LocationInterface;
 import de.chaos.mc.lobbysystem.utils.locationlibary.LocationRepository;
 import de.chaos.mc.lobbysystem.utils.megaUtils.menu.MenuFactory;
+import de.chaos.mc.lobbysystem.utils.scorebaord.ScoreboardManager;
 import de.chaos.mc.lobbysystem.utils.sichtbarkeitsutils.SichtbarkeitsInterface;
 import de.chaos.mc.lobbysystem.utils.sichtbarkeitsutils.SichtbarkeitsRepository;
 import de.chaos.mc.serverapi.api.ServerAPI;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.PluginManager;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class LobbySystem extends JavaPlugin {
@@ -25,6 +23,7 @@ public class LobbySystem extends JavaPlugin {
     public static MenuFactory menuFactory;
     public static SichtbarkeitsInterface sichtbarkeitsIntreface;
     private SichtbarkeitsRepository sichtbarkeitsRepository;
+    private ScoreboardManager scoreboardManager;
 
     @Override
     public void onEnable() {
@@ -37,13 +36,19 @@ public class LobbySystem extends JavaPlugin {
         sichtbarkeitsIntreface = sichtbarkeitsRepository;
         menuFactory = MenuFactory.register(this);
 
+        scoreboardManager = new ScoreboardManager(this);
+
         getCommand("setLocation").setExecutor(new SetLocationCommand());
 
-        PluginManager pluginManager = Bukkit.getPluginManager();
-        pluginManager.registerEvents(new ConnectionListener(), this);
-        pluginManager.registerEvents(new ClickListener(), this);
-        pluginManager.registerEvents(new InventoryClickListener(), this);
-        pluginManager.registerEvents(new DoubleJumpListener(), this);
+        registerEvent(new ConnectionListener());
+        registerEvent(new ClickListener());
+        registerEvent(new DoubleJumpListener());
+        registerEvent(new EventListener());
+
+    }
+
+    public void registerEvent(Listener listener) {
+        Bukkit.getPluginManager().registerEvents(listener, getLobbySystem());
     }
 
     @Override
