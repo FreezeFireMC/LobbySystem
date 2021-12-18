@@ -12,23 +12,23 @@ import org.bukkit.event.player.PlayerToggleFlightEvent;
 
 public class DoubleJumpListener implements Listener {
     @EventHandler
-    public void onPlayerFly(PlayerToggleFlightEvent e) {
-        Player p = e.getPlayer();
-        if (p.getGameMode() != GameMode.CREATIVE) {
-            e.setCancelled(true);
-            p.setAllowFlight(false);
-            p.setFlying(false);
-            p.setVelocity(p.getLocation().getDirection().multiply(3.0D).setY(1.9D));
-            p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 15);
+    public void onPlayerFly(PlayerToggleFlightEvent event) {
+        Player player = event.getPlayer();
+        if (player.getGameMode() != GameMode.CREATIVE) {
+            event.setCancelled(true);
+            player.setAllowFlight(false);
+            player.setFlying(false);
+            player.setVelocity(player.getLocation().getDirection().multiply(3.0D).setY(1.9D));
+            player.playEffect(player.getLocation(), Effect.BLAZE_SHOOT, 15);
         }
     }
 
     @EventHandler
-    public void onPlayerMove(PlayerMoveEvent e) {
-        Player p = e.getPlayer();
-        if ((e.getPlayer().getGameMode() != GameMode.CREATIVE)
-                && (p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR)) {
-            p.setAllowFlight(true);
+    public void onPlayerMove(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+        if ((event.getPlayer().getGameMode() != GameMode.CREATIVE)
+                && (player.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR)) {
+            player.setAllowFlight(true);
         }
     }
 }

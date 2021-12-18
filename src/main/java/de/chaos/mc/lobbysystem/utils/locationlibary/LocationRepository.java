@@ -1,82 +1,35 @@
 package de.chaos.mc.lobbysystem.utils.locationlibary;
 
-import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
-import de.chaos.mc.lobbysystem.utils.daos.DAOManager;
-import de.chaos.mc.lobbysystem.utils.daos.LocationDAO;
-import org.bukkit.Bukkit;
+import lombok.Getter;
 import org.bukkit.Location;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LocationRepository implements LocationInterface {
-    public JdbcPooledConnectionSource connectionSource;
-    public DAOManager<LocationDAO, String> daoManager;
+    @Getter private LocationConfigHandler locationConfigHandler;
 
-    public LocationRepository(JdbcPooledConnectionSource jdbcPooledConnectionSource) {
-        this.connectionSource = jdbcPooledConnectionSource;
-        this.daoManager = new DAOManager<LocationDAO, String>(LocationDAO.class, connectionSource);
+
+    public LocationRepository() {
+        this.locationConfigHandler = new LocationConfigHandler();
+        locationConfigHandler.loadConfig();
     }
 
-
     @Override
-    public List<String> getAllMaps() {
-        List<String> list = new ArrayList<>();
-        try {
-            List<LocationDAO> locationList = daoManager.getDAO().queryForAll();
-            for (LocationDAO locationDAO : locationList) {
-                list.add(locationDAO.getName());
-            }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-        return list;
+    public List<String> getAllLocations() {
+        List<String> locations = Arrays.asList(locationConfigHandler.getLocationsFile().list());
+        return locations;
     }
 
 
     @Override
     public Location addLocation(String Locationname, Location location) {
-        LocationDAO locationDAO = LocationDAO.builder()
-                .Name(Locationname)
-                .World(location.getWorld().getName()).
-                x((long) location.getX())
-                .y((long) location.getY())
-                .z((long) location.getZ())
-                .pitch((long) location.getPitch())
-                .yaw((long) location.getYaw())
-                .build();
-        try {
-            daoManager.getDAO().createOrUpdate(locationDAO);
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-
+        locationConfigHandler.saveMap(Locationname, location);
         return location;
     }
 
     @Override
     public Location getLocation(String LocationName) {
-        LocationDAO locationDAO = null;
-        try {
-            locationDAO = daoManager.getDAO().queryForId(LocationName);
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-        if (locationDAO == null) return null;
-        Location location = new Location(Bukkit.getWorld(locationDAO.getWorld()), locationDAO.getX(), locationDAO.getY(), locationDAO.getZ());
-        location.setPitch(locationDAO.getPitch());
-        location.setYaw(location.getYaw());
-        return location;
-    }
-
-    @Override
-    public Location delLocation(String LocationName) {
-        try {
-            daoManager.getDAO().deleteById(LocationName);
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-        return null;
+        return locationConfigHandler.readLocation(LocationName);
     }
 }

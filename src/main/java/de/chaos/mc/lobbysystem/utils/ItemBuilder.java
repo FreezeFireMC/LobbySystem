@@ -60,11 +60,6 @@ public class ItemBuilder {
         return this;
     }
 
-    @Deprecated
-    public ItemBuilder setDyeColour(DyeColor dyeColour) {;
-        return null;
-    }
-
     public ItemStack itemStack() {
         return itemStack;
     }

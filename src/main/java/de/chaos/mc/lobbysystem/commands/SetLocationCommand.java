@@ -17,8 +17,7 @@ public class SetLocationCommand implements CommandExecutor {
             if (player.hasPermission(String.valueOf(Permissions.SETLOCATION))) {
                 if (args.length == 1) {
                     String mapName = args[0];
-                    if (LobbySystem.getLocationInterface().getLocation(mapName) != null) LobbySystem.getLocationInterface().delLocation(mapName);
-                    LobbySystem.getLocationInterface().addLocation(mapName, player.getLocation());
+                    LobbySystem.getLobbySystem().getLocationInterface().addLocation(mapName, player.getLocation());
                 } else player.sendMessage(DefaultMessages.wrongSyntax("/setLocation [LocationName]"));
 
             } else player.sendMessage(DefaultMessages.NOPERMISSION);

@@ -10,25 +10,24 @@ import org.bukkit.entity.Player;
 public class LobbyInventorys {
     public static void setLobbyInventory(Player player) {
         Menu menu = LobbySystem.menuFactory.createMenu(45, "§6Navigator");
-        menu.additem(0, new ItemBuilder(Material.WOOD_AXE).name("§6GunGame").itemStack(), player1 -> {
-            player1.teleport(LobbySystem.getLocationInterface().getLocation("GunGame"));
+        menu.additem(10, new ItemBuilder(Material.BED).name("§6BedWars").itemStack(), player1 -> {
+            player1.teleport(LobbySystem.getLobbySystem().getLocationInterface().getLocation("BedWars"));
             player1.closeInventory();
         });
-        menu.additem(8, new ItemBuilder(Material.GRASS).name("§6CityBuild").itemStack(), player1 -> {
-            player1.teleport(LobbySystem.getLocationInterface().getLocation("CityBuild"));
+        menu.additem(16, new ItemBuilder(Material.GRASS).name("§6CityBuild").itemStack(), player1 -> {
+            player1.teleport(LobbySystem.getLobbySystem().getLocationInterface().getLocation("CityBuild"));
             player1.closeInventory();
         });
         menu.additem(22, new ItemBuilder(Material.NETHER_STAR).name("§6Spawn").itemStack(), player1 -> {
-            player1.teleport(LobbySystem.getLocationInterface().getLocation("Spawn"));
+            player1.teleport(LobbySystem.getLobbySystem().getLocationInterface().getLocation("Spawn"));
             player1.closeInventory();
         });
-        menu.additem(36, new ItemBuilder(Material.SNOW_BALL).name("§6FreezeFight").itemStack(), player1 -> {
-            player1.teleport(LobbySystem.getLocationInterface().getLocation("SkyWars"));
+        menu.additem(28, new ItemBuilder(Material.SNOW_BALL).name("§6FreezeFight").itemStack(), player1 -> {
+            player1.teleport(LobbySystem.getLobbySystem().getLocationInterface().getLocation("FreezeFight"));
             player1.closeInventory();
         });
-        menu.additem(44, new ItemBuilder(Material.SKULL_ITEM, 1, 3).skullOwner("ChaosNeko").name("§6Bald...").itemStack(), player1 -> {
-            player1.sendMessage(DefaultMessages.normalMessage("Kommt bald..."));
-            player1.closeInventory();
+        menu.additem(34, new ItemBuilder(Material.BLAZE_ROD).name("§6MLGRush").itemStack(), player1 -> {
+            player1.teleport(LobbySystem.getLobbySystem().getLocationInterface().getLocation("MLGRush"));
         });
         menu.openInventory(player);
     }

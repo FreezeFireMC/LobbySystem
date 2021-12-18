@@ -36,22 +36,22 @@ public class ScoreboardManager {
                     PlayerScorebaord playerScorebaord = playerScorebaordHashMap.get(uuid);
                     Objective objective = playerScorebaord.getScoreboard().getObjective("Lobby");
                     Player player = Bukkit.getPlayer(uuid);
-                    playerScorebaord.getCoins().setSuffix(String.valueOf(LobbySystem.getServerAPI().getCoinsInterface().getCoins(player.getUniqueId())));
+                    playerScorebaord.getCoins().setSuffix("§b" + String.valueOf(LobbySystem.getServerAPI().getCoinsInterface().getCoins(player.getUniqueId())));
                     Team visibility = playerScorebaord.getVisibility();
                     if (sichtbarkeitsIntreface.getCurrentMode(player.getUniqueId()) == 0) {
-                        visibility.setSuffix("Alle");
+                        visibility.setSuffix("§bAlle");
                     }
 
                     if (sichtbarkeitsIntreface.getCurrentMode(player.getUniqueId()) == 1) {
-                        visibility.setSuffix("Nur VIP");
+                        visibility.setSuffix("§bNur VIP");
                     }
 
                     if (sichtbarkeitsIntreface.getCurrentMode(player.getUniqueId()) == 2) {
-                        visibility.setSuffix("Keine");
+                        visibility.setSuffix("§bKeine");
                     }
-                    visibility.addEntry(ChatColor.RED.toString());
-                    objective.getScore(ChatColor.BLUE.toString()).setScore(4);
-                    objective.getScore(ChatColor.RED.toString()).setScore(1);
+                    visibility.addEntry(ChatColor.AQUA.toString());
+                    objective.getScore(ChatColor.DARK_RED.toString()).setScore(4);
+                    objective.getScore(ChatColor.AQUA.toString()).setScore(1);
                 }
             }
         }.runTaskTimer(plugin,20, 1);
@@ -72,31 +72,31 @@ public class ScoreboardManager {
 
         Team coins = scoreboard.registerNewTeam(player.getName() + ".1");
         coins.setPrefix("§8» §b");
-        coins.setSuffix(String.valueOf(LobbySystem.getServerAPI().getCoinsInterface().getCoins(player.getUniqueId())));
-        coins.addEntry(ChatColor.BLUE.toString());
+        coins.setSuffix("§b" + String.valueOf(LobbySystem.getServerAPI().getCoinsInterface().getCoins(player.getUniqueId())));
+        coins.addEntry(ChatColor.DARK_RED.toString());
 
         Team visibitlity = scoreboard.registerNewTeam( player.getName() + ".2");
         visibitlity.setPrefix("§8» §b");
 
         if (sichtbarkeitsIntreface.getCurrentMode(player.getUniqueId()) == 0) {
-            visibitlity.setSuffix("Alle");
+            visibitlity.setSuffix("§bAlle");
         }
 
         if (sichtbarkeitsIntreface.getCurrentMode(player.getUniqueId()) == 1) {
-            visibitlity.setSuffix("Nur VIP");
+            visibitlity.setSuffix("§bNur VIP");
         }
 
         if (sichtbarkeitsIntreface.getCurrentMode(player.getUniqueId()) == 2) {
-            visibitlity.setSuffix("Keine");
+            visibitlity.setSuffix("§bKeine");
         }
-        visibitlity.addEntry(ChatColor.RED.toString());
+        visibitlity.addEntry(ChatColor.AQUA.toString());
 
         objective.getScore("§0").setScore(6);
         objective.getScore("§cCoins:").setScore(5);
-        objective.getScore(ChatColor.BLUE.toString()).setScore(4);
+        objective.getScore(ChatColor.DARK_RED.toString()).setScore(4);
         objective.getScore("§1 ").setScore(3);
         objective.getScore("§cSichtbarkeit: ").setScore(2);
-        objective.getScore(ChatColor.RED.toString()).setScore(1);
+        objective.getScore(ChatColor.AQUA.toString()).setScore(1);
         objective.getScore("§3").setScore(0);
 
 

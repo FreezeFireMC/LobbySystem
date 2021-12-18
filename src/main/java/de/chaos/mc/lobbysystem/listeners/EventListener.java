@@ -1,12 +1,16 @@
 package de.chaos.mc.lobbysystem.listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.WeatherType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
 public class EventListener implements Listener {
@@ -22,7 +26,19 @@ public class EventListener implements Listener {
         event.setCancelled(true);
     }
     @EventHandler
-    public void onClick(InventoryClickEvent event) {
+    public void onMeltEvent(BlockPhysicsEvent event) {
+        if(event.getBlock().getType() == Material.SNOW_BLOCK && event.getBlock().getType() == Material.WATER){
+            event.setCancelled(true);
+        }
+    }
+    @EventHandler
+    public void onItemDrop(PlayerDropItemEvent event) {
         event.setCancelled(true);
     }
+
+    @EventHandler
+    public void onplayerEntityInteractEvent(PlayerInteractAtEntityEvent event) {
+        event.setCancelled(true);
+    }
+
 }

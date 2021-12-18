@@ -3,7 +3,6 @@ package de.chaos.mc.lobbysystem.utils.sichtbarkeitsutils;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import de.chaos.mc.lobbysystem.utils.daos.DAOManager;
 import de.chaos.mc.lobbysystem.utils.daos.HidePlayerDAO;
-import de.chaos.mc.lobbysystem.utils.daos.LocationDAO;
 
 import java.sql.SQLException;
 import java.util.UUID;

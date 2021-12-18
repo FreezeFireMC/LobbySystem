@@ -2,6 +2,7 @@ package de.chaos.mc.lobbysystem.listeners;
 
 import de.chaos.mc.lobbysystem.LobbySystem;
 import de.chaos.mc.lobbysystem.utils.ItemBuilder;
+import de.chaos.mc.lobbysystem.utils.LobbyInventorys;
 import de.chaos.mc.lobbysystem.utils.scorebaord.ScoreboardManager;
 import de.chaos.mc.lobbysystem.utils.sichtbarkeitsutils.SichtbarkeitsInterface;
 import de.chaos.mc.lobbysystem.utils.stringUtils.Permissions;
@@ -27,13 +28,13 @@ public class ConnectionListener implements Listener {
         player.getInventory().setItem(1, new ItemBuilder(Material.COMPASS).name("§6Navigator").itemStack());
         player.getInventory().setItem(5, new ItemBuilder(Material.ENDER_CHEST).name("§6Cosmetics").itemStack());
         player.getInventory().setItem(7, new ItemBuilder(Material.SKULL_ITEM, 1, 3).skullOwner(player.getName()).name("§6Bald...").itemStack());
-        if (LobbySystem.getLocationInterface().getLocation("Spawn") != null) {
-            player.teleport(LobbySystem.getLocationInterface().getLocation("Spawn"));
+        if (LobbySystem.getLobbySystem().getLocationInterface().getLocation("Spawn") != null) {
+            player.teleport(LobbySystem.getLobbySystem().getLocationInterface().getLocation("Spawn"));
         }
         player.setAllowFlight(true);
         player.setFlying(false);
 
-
+        LobbySystem.getLobbySystem().getUpdateInventorySortingInterface().checkIfFirstJoin(player.getUniqueId());
 
         if (sichtbarkeitsIntreface.getCurrentMode(uuid) == 0) {
             for (Player all : Bukkit.getOnlinePlayers()) {
