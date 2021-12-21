@@ -1,4 +1,4 @@
-package de.chaos.mc.lobbysystem.utils.inventorylibary.ormlite;
+package de.chaos.mc.lobbysystem.utils.mlgrushinventorylibary.ormlite;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -14,7 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @DatabaseTable(tableName = "MLGRushInvSorting")
-public class InventoryDAO {
+public class MLGRushInventoryDAO {
     public static final String UUID_FIELD = "UUID";
     public static final String STICK_SLOT = "STICK_SLOT";
     public static final String PICKAXE_FIELD = "PICKAXE_SLOT";

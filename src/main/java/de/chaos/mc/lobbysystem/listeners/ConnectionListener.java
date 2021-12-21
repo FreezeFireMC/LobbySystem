@@ -2,11 +2,11 @@ package de.chaos.mc.lobbysystem.listeners;
 
 import de.chaos.mc.lobbysystem.LobbySystem;
 import de.chaos.mc.lobbysystem.utils.ItemBuilder;
-import de.chaos.mc.lobbysystem.utils.LobbyInventorys;
+import de.chaos.mc.lobbysystem.utils.playerlibary.PlayerInterface;
 import de.chaos.mc.lobbysystem.utils.scorebaord.ScoreboardManager;
 import de.chaos.mc.lobbysystem.utils.sichtbarkeitsutils.SichtbarkeitsInterface;
 import de.chaos.mc.lobbysystem.utils.stringUtils.Permissions;
-import de.chaos.mc.serverapi.utils.stringLibary.DefaultMessages;
+import de.chaos.mc.serverapi.utils.stringLibary.AbstractMessages;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,17 +17,21 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import java.util.UUID;
 
 public class ConnectionListener implements Listener {
+    private PlayerInterface playerInterface;
+    public ConnectionListener(PlayerInterface playerInterface) {
+        this.playerInterface = playerInterface;
+    }
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         SichtbarkeitsInterface sichtbarkeitsIntreface = LobbySystem.sichtbarkeitsIntreface;
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
-        event.setJoinMessage(DefaultMessages.joinMessage(player));
+        event.setJoinMessage(AbstractMessages.joinMessage(player));
         player.setGameMode(GameMode.ADVENTURE);
         player.getInventory().clear();
         player.getInventory().setItem(1, new ItemBuilder(Material.COMPASS).name("§6Navigator").itemStack());
         player.getInventory().setItem(5, new ItemBuilder(Material.ENDER_CHEST).name("§6Cosmetics").itemStack());
-        player.getInventory().setItem(7, new ItemBuilder(Material.SKULL_ITEM, 1, 3).skullOwner(player.getName()).name("§6Bald...").itemStack());
+        player.getInventory().setItem(7, new ItemBuilder(Material.SKULL_ITEM, 1, 3).skullOwner(player.getName()).name("§6Profile").itemStack());
         if (LobbySystem.getLobbySystem().getLocationInterface().getLocation("Spawn") != null) {
             player.teleport(LobbySystem.getLobbySystem().getLocationInterface().getLocation("Spawn"));
         }
@@ -61,12 +65,14 @@ public class ConnectionListener implements Listener {
             player.getInventory().setItem(3, new ItemBuilder(Material.INK_SACK, 1, 0, DyeColor.RED).name("§6Spieler Sichtbarkeit").itemStack());
         }
         player.setPlayerWeather(WeatherType.CLEAR);
+        playerInterface.checkIfFirstJoin(player.getUniqueId());
         ScoreboardManager.getScorebaord(player);
+        LobbySystem.getLobbySystem().getStringsLoader().getPlayerLobbyLanguage(uuid);
     }
 
     @EventHandler
     public void onLeave(PlayerQuitEvent event) {
-        event.setQuitMessage(DefaultMessages.leaveMessage(event.getPlayer()));
+        event.setQuitMessage(AbstractMessages.leaveMessage(event.getPlayer()));
         ScoreboardManager.playerScorebaordHashMap.remove(event.getPlayer().getUniqueId());
     }
 }

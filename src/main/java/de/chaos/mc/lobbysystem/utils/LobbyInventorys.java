@@ -3,12 +3,15 @@ package de.chaos.mc.lobbysystem.utils;
 import de.chaos.mc.lobbysystem.LobbySystem;
 import de.chaos.mc.lobbysystem.utils.megaUtils.menu.Menu;
 import de.chaos.mc.lobbysystem.utils.stringUtils.Permissions;
-import de.chaos.mc.serverapi.utils.stringLibary.DefaultMessages;
+import de.chaos.mc.serverapi.ServerAPIBukkitMain;
+import de.chaos.mc.serverapi.utils.playerlibary.languageLibary.PlayerLanguage;
+import de.chaos.mc.serverapi.utils.stringLibary.AbstractMessages;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 public class LobbyInventorys {
     public static void setLobbyInventory(Player player) {
+        PlayerLanguage playerLanguage = ServerAPIBukkitMain.getOnlinePlayers().get(player.getUniqueId());
         Menu menu = LobbySystem.menuFactory.createMenu(45, "§6Navigator");
         menu.additem(10, new ItemBuilder(Material.BED).name("§6BedWars").itemStack(), player1 -> {
             player1.teleport(LobbySystem.getLobbySystem().getLocationInterface().getLocation("BedWars"));
@@ -51,52 +54,56 @@ public class LobbyInventorys {
         Menu menu = LobbySystem.menuFactory.createMenu(27, "§6Köpfe");
         menu.additem(10, new ItemBuilder(Material.SKULL_ITEM, 1, 3).skullOwner("GommeHD").name("§6GommeHD´s Kopd").itemStack(), player -> {
                     player.getInventory().setHelmet(new ItemBuilder(Material.SKULL_ITEM, 1, 3).skullOwner("GommeHD").name("§6GommeHD´s Kopd").itemStack());
-            player.sendMessage(DefaultMessages.normalMessage("Dein Kopf wurde geändert!"));
+            player.sendMessage(AbstractMessages.normalMessage("Dein Kopf wurde geändert!"));
                 });
 
         menu.additem(11, new ItemBuilder(Material.SKULL_ITEM, 1, 3).name("§6BastiGHG´s Kopf").skullOwner("BastiGHG").itemStack(), player -> {
             player.getInventory().setHelmet(new ItemBuilder(Material.SKULL_ITEM, 1, 3).name("§6BastiGHG´s Kopf").skullOwner("BastiGHG").itemStack());
-            player.sendMessage(DefaultMessages.normalMessage("Dein Kopf wurde geändert!"));
+            player.sendMessage(AbstractMessages.normalMessage("Dein Kopf wurde geändert!"));
         });
         menu.additem(12, new ItemBuilder(Material.SKULL_ITEM, 1, 3).name("§6thejocraft´s Kopf").skullOwner("thejocraft").itemStack(), player -> {
             player.getInventory().setHelmet(new ItemBuilder(Material.SKULL_ITEM, 1, 3).name("§6thejocraft´s Kopf").skullOwner("thejocraft").itemStack());
-            player.sendMessage(DefaultMessages.normalMessage("Dein Kopf wurde geändert!"));
+            player.sendMessage(AbstractMessages.normalMessage("Dein Kopf wurde geändert!"));
         });
         menu.additem(13, new ItemBuilder(Material.SKULL_ITEM ,1 ,3).name("§6RedSlxzer´s Kopf").skullOwner("RedSlxzer").itemStack(), player -> {
             if (player.hasPermission(String.valueOf(Permissions.VIPPERMISSIONS))) {
                 player.getInventory().setHelmet(new ItemBuilder(Material.SKULL_ITEM ,1 ,3).name("§6RedSlxzer´s Kopf").skullOwner("RedSlxzer").itemStack());
-                player.sendMessage(DefaultMessages.normalMessage("Dein Kopf wurde geändert!"));
+                player.sendMessage(AbstractMessages.normalMessage("Dein Kopf wurde geändert!"));
             } else {
-                player.sendMessage(DefaultMessages.NOPERMISSION);
+                PlayerLanguage playerLanguage = ServerAPIBukkitMain.getOnlinePlayers().get(player.getUniqueId());
+                player.sendMessage(playerLanguage.getNOPERMISSION());
             }
         });
         menu.additem(14, new ItemBuilder(Material.SKULL_ITEM ,1 ,3).name("§6 " + invplayer.getName() + "´s Kopf").skullOwner(invplayer.getName()).itemStack(), player -> {
             if (player.hasPermission(String.valueOf(Permissions.VIPPERMISSIONS))) {
                 player.getInventory().setHelmet(new ItemBuilder(Material.SKULL_ITEM ,1 ,3).name("§6 " + invplayer.getName() + "´s Kopf").skullOwner(invplayer.getName()).itemStack());
-                player.sendMessage(DefaultMessages.normalMessage("Dein Kopf wurde geändert!"));
+                player.sendMessage(AbstractMessages.normalMessage("Dein Kopf wurde geändert!"));
             } else {
-                player.sendMessage(DefaultMessages.NOPERMISSION);
+                PlayerLanguage playerLanguage = ServerAPIBukkitMain.getOnlinePlayers().get(player.getUniqueId());
+                player.sendMessage(playerLanguage.getNOPERMISSION());
             }
         });
         menu.additem(15, new ItemBuilder(Material.TNT).name("§6TNT").itemStack(), player -> {
             if (player.hasPermission(String.valueOf(Permissions.VIPPERMISSIONS))) {
                 player.getInventory().setHelmet(new ItemBuilder(Material.TNT).name("§6TNT").itemStack());
-                player.sendMessage(DefaultMessages.normalMessage("Dein Kopf wurde geändert!"));
+                player.sendMessage(AbstractMessages.normalMessage("Dein Kopf wurde geändert!"));
             } else {
-                player.sendMessage(DefaultMessages.NOPERMISSION);
+                PlayerLanguage playerLanguage = ServerAPIBukkitMain.getOnlinePlayers().get(player.getUniqueId());
+                player.sendMessage(playerLanguage.getNOPERMISSION());
             }
         });
         menu.additem(16, new ItemBuilder(Material.SKULL_ITEM ,1 ,3).name("§6ChaosNeko´s Kopf").skullOwner("ChaosNeko").itemStack(), player -> {
             if (player.hasPermission(String.valueOf(Permissions.VIPPERMISSIONS))) {
                 player.getInventory().setHelmet(new ItemBuilder(Material.SKULL_ITEM ,1 ,3).name("§6ChaosNeko´s Kopf").skullOwner("ChaosNeko").itemStack());
-                player.sendMessage(DefaultMessages.normalMessage("Dein Kopf wurde geändert!"));
+                player.sendMessage(AbstractMessages.normalMessage("Dein Kopf wurde geändert!"));
             } else {
-                player.sendMessage(DefaultMessages.NOPERMISSION);
+                PlayerLanguage playerLanguage = ServerAPIBukkitMain.getOnlinePlayers().get(player.getUniqueId());
+                player.sendMessage(playerLanguage.getNOPERMISSION());
             }
         });
         menu.additem(26, new ItemBuilder(Material.BARRIER).name("§cKopf entfernen...").itemStack(), player -> {
             player.getInventory().setHelmet(null);
-            player.sendMessage(DefaultMessages.normalMessage("Dein Kopf wurde entfernt!"));
+            player.sendMessage(AbstractMessages.normalMessage("Dein Kopf wurde entfernt!"));
         });
 
         return menu;

@@ -3,11 +3,11 @@ package de.chaos.mc.lobbysystem.listeners;
 import de.chaos.mc.lobbysystem.LobbySystem;
 import de.chaos.mc.lobbysystem.utils.ItemBuilder;
 import de.chaos.mc.lobbysystem.utils.LobbyInventorys;
-import de.chaos.mc.lobbysystem.utils.inventorylibary.ormlite.UpdateInventorySortingInterface;
+import de.chaos.mc.lobbysystem.utils.lobbylanguagelibary.PlayerLobbyLanguage;
 import de.chaos.mc.lobbysystem.utils.profile.ProfileInventorys;
 import de.chaos.mc.lobbysystem.utils.sichtbarkeitsutils.SichtbarkeitsInterface;
 import de.chaos.mc.lobbysystem.utils.stringUtils.Permissions;
-import de.chaos.mc.serverapi.utils.stringLibary.DefaultMessages;
+import de.chaos.mc.serverapi.utils.stringLibary.AbstractMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -30,6 +30,7 @@ public class ClickListener implements Listener {
     public void onClick(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
+        PlayerLobbyLanguage playerLobbyLanguage = LobbySystem.getOnlinePlayers().get(uuid);
         if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
             if (event.getClickedBlock().getType() == Material.NOTE_BLOCK) {
                 event.setCancelled(true);
@@ -56,7 +57,6 @@ public class ClickListener implements Listener {
                 event.setCancelled(true);
             }
         }
-
 
         if (event.getItem().getType().equals(Material.SKULL_ITEM)) {
             profileInventorys.getMainInventory(player);
@@ -86,7 +86,7 @@ public class ClickListener implements Listener {
                         }
                         sichtbarkeitsIntreface.updateCurrentMode(uuid, 1);
                         player.getInventory().setItem(3, new ItemBuilder(Material.INK_SACK, 1, 0, DyeColor.PURPLE).name("§6Spieler Sichtbarkeit").itemStack());
-                        player.sendMessage(DefaultMessages.normalMessage("Du siehtst nur noch VIP Spieler"));
+                        player.sendMessage(playerLobbyLanguage.getOnlyVipVisivble());
                     }
                     if (sichtbarkeitsIntreface.getCurrentMode(uuid) == 2) {
                         for (Player all : Bukkit.getOnlinePlayers()) {
@@ -94,7 +94,7 @@ public class ClickListener implements Listener {
                         }
                         sichtbarkeitsIntreface.updateCurrentMode(uuid, 2);
                         player.getInventory().setItem(3, new ItemBuilder(Material.INK_SACK, 1, 0, DyeColor.RED).name("§6Spieler Sichtbarkeit").itemStack());
-                        player.sendMessage(DefaultMessages.normalMessage("Du siehtst keine Spieler mehr"));
+                        player.sendMessage(playerLobbyLanguage.noPlayerVisible);
                     }
                 } else {
                     sichtbarkeitsIntreface.updateCurrentMode(uuid, Math.addExact(sichtbarkeitsIntreface.getCurrentMode(uuid), 0));
@@ -102,7 +102,7 @@ public class ClickListener implements Listener {
                         player.showPlayer(LobbySystem.getLobbySystem(), all);
                     }
                     player.getInventory().setItem(3, new ItemBuilder(Material.INK_SACK, 1, 0, DyeColor.LIME).name("§6Spieler Sichtbarkeit").itemStack());
-                    player.sendMessage(DefaultMessages.normalMessage("Du siehtst nun alle Spieler!"));
+                    player.sendMessage(playerLobbyLanguage.getAllPlayerVisible());
                     sichtbarkeitsIntreface.updateCurrentMode(uuid, 0);
                 }
             }

@@ -1,7 +1,7 @@
 package de.chaos.mc.lobbysystem.utils.profile;
 
 import de.chaos.mc.lobbysystem.utils.ItemBuilder;
-import de.chaos.mc.lobbysystem.utils.inventorylibary.MLGRushProfileInv;
+import de.chaos.mc.lobbysystem.utils.mlgrushinventorylibary.MLGRushProfileInv;
 import de.chaos.mc.lobbysystem.utils.megaUtils.menu.Menu;
 import de.chaos.mc.lobbysystem.utils.megaUtils.menu.MenuFactory;
 import org.bukkit.Material;
