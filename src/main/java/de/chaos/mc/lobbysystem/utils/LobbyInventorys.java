@@ -17,7 +17,7 @@ public class LobbyInventorys {
             player1.teleport(LobbySystem.getLobbySystem().getLocationInterface().getLocation("BedWars"));
             player1.closeInventory();
         });
-        menu.additem(16, new ItemBuilder(Material.GRASS).name("§6CityBuild").itemStack(), player1 -> {
+        menu.additem(16, new ItemBuilder(Material.GRASS).name("§6FreeBuild").itemStack(), player1 -> {
             player1.teleport(LobbySystem.getLobbySystem().getLocationInterface().getLocation("CityBuild"));
             player1.closeInventory();
         });

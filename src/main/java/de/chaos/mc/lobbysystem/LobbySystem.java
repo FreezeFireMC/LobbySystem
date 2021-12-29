@@ -2,6 +2,7 @@ package de.chaos.mc.lobbysystem;
 
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import de.chaos.mc.lobbysystem.commands.SetLocationCommand;
+import de.chaos.mc.lobbysystem.commands.setLanguageHologramCommand;
 import de.chaos.mc.lobbysystem.listeners.*;
 import de.chaos.mc.lobbysystem.utils.lobbylanguagelibary.LobbyStringsLoader;
 import de.chaos.mc.lobbysystem.utils.lobbylanguagelibary.PlayerLobbyLanguage;
@@ -43,8 +44,8 @@ public class LobbySystem extends JavaPlugin {
     private RedStoneLampLiter redStoneLampLiter;
     @Getter private UpdateMLGRushInventorySortingInterface updateInventorySortingInterface;
     private UpdateMLGRushInvSortingRepository updateInvSortingRepository;
-    private MLGRushProfileInv mlgRushProfileInv;
-    private ProfileInventorys profileInventorys;
+    @Getter private MLGRushProfileInv mlgRushProfileInv;
+    @Getter private ProfileInventorys profileInventorys;
     private LanguageInterface languageInterface;
     private PlayerInterface playerInterface;
     @Getter private static HashMap<UUID, PlayerLobbyLanguage> onlinePlayers;
@@ -66,25 +67,27 @@ public class LobbySystem extends JavaPlugin {
 
         menuFactory = MenuFactory.register(this);
 
-        scoreboardManager = new ScoreboardManager(this);
+        scoreboardManager = new ScoreboardManager(this, languageInterface);
 
         updateInvSortingRepository = new UpdateMLGRushInvSortingRepository(connectionSource);
         updateInventorySortingInterface = updateInvSortingRepository;
 
         mlgRushProfileInv = new MLGRushProfileInv(updateInventorySortingInterface, menuFactory, languageInterface);
 
-        profileInventorys = new ProfileInventorys(menuFactory, mlgRushProfileInv);
+        profileInventorys = new ProfileInventorys(menuFactory, mlgRushProfileInv, languageInterface, scoreboardManager);
 
         playerInterface = new PlayerRepository(connectionSource);
 
         getCommand("setLocation").setExecutor(new SetLocationCommand());
+        getCommand("setLanguageHolo").setExecutor(new setLanguageHologramCommand(languageInterface, this));
 
-        registerEvent(new ConnectionListener(playerInterface));
+        registerEvent(new ConnectionListener(playerInterface, scoreboardManager));
         registerEvent(new ClickListener(profileInventorys));
         registerEvent(new DoubleJumpListener());
         registerEvent(new EventListener());
         registerEvent(new PlayerInteractListener());
         registerEvent(new PlayerMoveListener());
+        registerEvent(new EntityInteractEntitiyListener());
         registerEvent(new InventoryClickListener(updateInventorySortingInterface));
         registerEvent(new InventoryCloseListener(updateInventorySortingInterface, languageInterface));
         redStoneLampLiter = new RedStoneLampLiter(Bukkit.getWorld("world"), this);

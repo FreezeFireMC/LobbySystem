@@ -1,5 +1,6 @@
 package de.chaos.mc.lobbysystem.utils.scorebaord;
 
+import de.chaos.mc.serverapi.utils.playerlibary.languageLibary.LanguageType;
 import lombok.Builder;
 import lombok.Data;
 import org.bukkit.scoreboard.Scoreboard;
@@ -14,4 +15,5 @@ public class PlayerScorebaord {
     public Scoreboard scoreboard;
     public Team coins;
     public Team visibility;
+    public LanguageType languageType;
 }

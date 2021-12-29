@@ -16,4 +16,7 @@ public class PlayerLobbyLanguage {
     public String onlyVipVisivble;
     public String noPlayerVisible;
     public String allPlayerVisible;
+    public String languageUpdated;
+    public String languageInv;
+    public String visibilityItem;
 }

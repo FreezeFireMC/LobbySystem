@@ -2,6 +2,7 @@ package de.chaos.mc.lobbysystem.listeners;
 
 import de.chaos.mc.lobbysystem.LobbySystem;
 import de.chaos.mc.lobbysystem.utils.ItemBuilder;
+import de.chaos.mc.lobbysystem.utils.lobbylanguagelibary.PlayerLobbyLanguage;
 import de.chaos.mc.lobbysystem.utils.playerlibary.PlayerInterface;
 import de.chaos.mc.lobbysystem.utils.scorebaord.ScoreboardManager;
 import de.chaos.mc.lobbysystem.utils.sichtbarkeitsutils.SichtbarkeitsInterface;
@@ -18,14 +19,17 @@ import java.util.UUID;
 
 public class ConnectionListener implements Listener {
     private PlayerInterface playerInterface;
-    public ConnectionListener(PlayerInterface playerInterface) {
+    private ScoreboardManager scoreboardManager;
+    public ConnectionListener(PlayerInterface playerInterface, ScoreboardManager scoreboardManager) {
         this.playerInterface = playerInterface;
+        this.scoreboardManager = scoreboardManager;
     }
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         SichtbarkeitsInterface sichtbarkeitsIntreface = LobbySystem.sichtbarkeitsIntreface;
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
+        LobbySystem.getLobbySystem().getStringsLoader().getPlayerLobbyLanguage(uuid);
         event.setJoinMessage(AbstractMessages.joinMessage(player));
         player.setGameMode(GameMode.ADVENTURE);
         player.getInventory().clear();
@@ -40,21 +44,22 @@ public class ConnectionListener implements Listener {
 
         LobbySystem.getLobbySystem().getUpdateInventorySortingInterface().checkIfFirstJoin(player.getUniqueId());
 
+        PlayerLobbyLanguage lobbyLanguage = LobbySystem.getOnlinePlayers().get(player.getUniqueId());
         if (sichtbarkeitsIntreface.getCurrentMode(uuid) == 0) {
             for (Player all : Bukkit.getOnlinePlayers()) {
                 player.showPlayer(LobbySystem.getLobbySystem(), all);
             }
-            player.getInventory().setItem(3, new ItemBuilder(Material.INK_SACK, 1, 0, DyeColor.LIME).name("§6Spieler Sichtbarkeit").itemStack());
+            player.getInventory().setItem(3, new ItemBuilder(Material.INK_SACK, 1, 0, DyeColor.LIME).name(lobbyLanguage.getPlayerVisiviltyItem()).itemStack());
         }
         if (sichtbarkeitsIntreface.getCurrentMode(uuid) == 1) {
             for (Player all : Bukkit.getOnlinePlayers()) {
-                if (!player.hasPermission(Permissions.VIPPERMISSIONS.toString())) {
+                if (player.hasPermission(Permissions.VIPPERMISSIONS.toString())) {
                     player.hidePlayer(LobbySystem.getLobbySystem(), all);
                 } else {
                     player.showPlayer(LobbySystem.getLobbySystem(), all);
                 }
             }
-            player.getInventory().setItem(3, new ItemBuilder(Material.INK_SACK, 1, 0, DyeColor.PURPLE).name("§6Spieler Sichtbarkeit").itemStack());
+            player.getInventory().setItem(3, new ItemBuilder(Material.INK_SACK, 1, 0, DyeColor.PURPLE).name(lobbyLanguage.getPlayerVisiviltyItem()).itemStack());
         }
         if (sichtbarkeitsIntreface.getCurrentMode(uuid) == 2) {
             for (Player all : Bukkit.getOnlinePlayers()) {
@@ -62,17 +67,16 @@ public class ConnectionListener implements Listener {
                     player.hidePlayer(LobbySystem.getLobbySystem(), all);
                 }
             }
-            player.getInventory().setItem(3, new ItemBuilder(Material.INK_SACK, 1, 0, DyeColor.RED).name("§6Spieler Sichtbarkeit").itemStack());
+            player.getInventory().setItem(3, new ItemBuilder(Material.INK_SACK, 1, 0, DyeColor.RED).name(lobbyLanguage.getPlayerVisiviltyItem()).itemStack());
         }
         player.setPlayerWeather(WeatherType.CLEAR);
         playerInterface.checkIfFirstJoin(player.getUniqueId());
-        ScoreboardManager.getScorebaord(player);
-        LobbySystem.getLobbySystem().getStringsLoader().getPlayerLobbyLanguage(uuid);
+        scoreboardManager.getScorebaord(player);
     }
 
     @EventHandler
     public void onLeave(PlayerQuitEvent event) {
         event.setQuitMessage(AbstractMessages.leaveMessage(event.getPlayer()));
-        ScoreboardManager.playerScorebaordHashMap.remove(event.getPlayer().getUniqueId());
+        scoreboardManager.playerScorebaordHashMap.remove(event.getPlayer().getUniqueId());
     }
 }

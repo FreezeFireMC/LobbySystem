@@ -9,7 +9,7 @@ public enum GermanMLGRushTranslations {
     PICKAXT("§6Spitzhacke"),
     BLOCKS("§6Blöcke"),
     INVNAME("§6MLGRush-InventarSortierung"),
-    INVENTORYUPDATED("§6You inventory-sorting for mlgrush was updated");
+    INVENTORYUPDATED("§6Deine Inventar Sortierung für MLGRush wurde aktualisiert");
 
     @Getter
     private String translation;

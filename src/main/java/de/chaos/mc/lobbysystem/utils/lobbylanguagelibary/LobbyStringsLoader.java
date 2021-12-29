@@ -4,6 +4,7 @@ import de.chaos.mc.lobbysystem.LobbySystem;
 import de.chaos.mc.lobbysystem.utils.lobbylanguagelibary.lobbytranslations.LobbyEnglishTranslation;
 import de.chaos.mc.lobbysystem.utils.lobbylanguagelibary.lobbytranslations.LobbyFrenchTranslation;
 import de.chaos.mc.lobbysystem.utils.lobbylanguagelibary.lobbytranslations.LobbyGermanTranslation;
+import de.chaos.mc.lobbysystem.utils.scorebaord.scoreboards.FrenchScoreboard;
 import de.chaos.mc.serverapi.utils.playerlibary.languageLibary.LanguageInterface;
 import de.chaos.mc.serverapi.utils.playerlibary.languageLibary.LanguageType;
 
@@ -25,6 +26,9 @@ public class LobbyStringsLoader {
                         .onlyVipVisivble(LobbyEnglishTranslation.onlyVipVisivle)
                         .noPlayerVisible(LobbyEnglishTranslation.noPlayerVisible)
                         .allPlayerVisible(LobbyEnglishTranslation.allPlayerVisivle)
+                        .languageUpdated(LobbyEnglishTranslation.languageUpdated)
+                        .languageInv(LobbyEnglishTranslation.languageInv)
+                        .visibilityItem(LobbyEnglishTranslation.visibilityItem)
                         .build();
                 LobbySystem.getOnlinePlayers().put(uuid, playerLobbyLanguage);
                 break;
@@ -36,6 +40,9 @@ public class LobbyStringsLoader {
                         .onlyVipVisivble(LobbyGermanTranslation.onlyVipVisivle)
                         .noPlayerVisible(LobbyGermanTranslation.noPlayerVisible)
                         .allPlayerVisible(LobbyGermanTranslation.allPlayerVisivle)
+                        .languageUpdated(LobbyGermanTranslation.languageUpdated)
+                        .languageInv(LobbyGermanTranslation.languageInv)
+                        .visibilityItem(LobbyGermanTranslation.visibilityItem)
                         .build();
                 LobbySystem.getOnlinePlayers().put(uuid, playerLobbyLanguage);
                 break;
@@ -47,6 +54,9 @@ public class LobbyStringsLoader {
                         .onlyVipVisivble(LobbyFrenchTranslation.onlyVipVisivle)
                         .noPlayerVisible(LobbyFrenchTranslation.noPlayerVisible)
                         .allPlayerVisible(LobbyFrenchTranslation.allPlayerVisivle)
+                        .languageUpdated(LobbyFrenchTranslation.languageUpdated)
+                        .languageInv(LobbyFrenchTranslation.languageInv)
+                        .visibilityItem(LobbyFrenchTranslation.visibilityItem)
                         .build();
                 LobbySystem.getOnlinePlayers().put(uuid, playerLobbyLanguage);
                 break;
@@ -54,10 +64,13 @@ public class LobbyStringsLoader {
                 playerLobbyLanguage = PlayerLobbyLanguage.builder()
                         .uuid(uuid)
                         .languageType(LanguageType.EG)
-                        .playerVisiviltyItem(LobbyGermanTranslation.playerVisiviltyItem)
-                        .onlyVipVisivble(LobbyGermanTranslation.onlyVipVisivle)
-                        .noPlayerVisible(LobbyGermanTranslation.noPlayerVisible)
-                        .allPlayerVisible(LobbyGermanTranslation.allPlayerVisivle)
+                        .playerVisiviltyItem(LobbyEnglishTranslation.playerVisiviltyItem)
+                        .onlyVipVisivble(LobbyEnglishTranslation.onlyVipVisivle)
+                        .noPlayerVisible(LobbyEnglishTranslation.noPlayerVisible)
+                        .allPlayerVisible(LobbyEnglishTranslation.allPlayerVisivle)
+                        .languageUpdated(LobbyEnglishTranslation.languageUpdated)
+                        .languageInv(LobbyEnglishTranslation.languageInv)
+                        .visibilityItem(LobbyEnglishTranslation.visibilityItem)
                         .build();
                 LobbySystem.getOnlinePlayers().put(uuid, playerLobbyLanguage);
                 break;

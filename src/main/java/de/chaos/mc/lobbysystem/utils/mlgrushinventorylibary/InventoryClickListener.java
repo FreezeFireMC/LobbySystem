@@ -7,6 +7,7 @@ import de.chaos.mc.lobbysystem.utils.mlgrushinventorylibary.ormlite.UpdateMLGRus
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class InventoryClickListener implements Listener {
@@ -17,7 +18,13 @@ public class InventoryClickListener implements Listener {
     @EventHandler
     public void onInvClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
+        if (event.getAction() == InventoryAction.HOTBAR_SWAP) {
+            event.setCancelled(true);
+        }
         if (event.getInventory().getName().equalsIgnoreCase(GermanMLGRushTranslations.INVNAME.getTranslation()) || event.getInventory().getName().equalsIgnoreCase(EnglishMLGRushITranslations.INVNAME.getTranslation()) || event.getInventory().getName().equalsIgnoreCase(FrenchMLGRushTranslations.INVNAME.getTranslation())) {
+            if (event.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY) {
+                event.setCancelled(true);
+            }
         } else {
             event.setCancelled(true);
         }

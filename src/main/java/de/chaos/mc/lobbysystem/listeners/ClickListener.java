@@ -7,7 +7,6 @@ import de.chaos.mc.lobbysystem.utils.lobbylanguagelibary.PlayerLobbyLanguage;
 import de.chaos.mc.lobbysystem.utils.profile.ProfileInventorys;
 import de.chaos.mc.lobbysystem.utils.sichtbarkeitsutils.SichtbarkeitsInterface;
 import de.chaos.mc.lobbysystem.utils.stringUtils.Permissions;
-import de.chaos.mc.serverapi.utils.stringLibary.AbstractMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -78,7 +77,7 @@ public class ClickListener implements Listener {
                     sichtbarkeitsIntreface.updateCurrentMode(uuid, Math.addExact(sichtbarkeitsIntreface.getCurrentMode(uuid), 1));
                     if (sichtbarkeitsIntreface.getCurrentMode(uuid) == 1) {
                         for (Player all : Bukkit.getOnlinePlayers()) {
-                            if (player.hasPermission(Permissions.VIPPERMISSIONS.toString())) {
+                            if (all.hasPermission(Permissions.VIPPERMISSIONS.toString())) {
                                 player.showPlayer(LobbySystem.getLobbySystem(), all);
                             } else {
                                 player.hidePlayer(LobbySystem.getLobbySystem(), all);
