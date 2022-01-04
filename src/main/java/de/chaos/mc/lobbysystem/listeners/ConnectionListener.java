@@ -33,9 +33,9 @@ public class ConnectionListener implements Listener {
         event.setJoinMessage(AbstractMessages.joinMessage(player));
         player.setGameMode(GameMode.ADVENTURE);
         player.getInventory().clear();
-        player.getInventory().setItem(1, new ItemBuilder(Material.COMPASS).name("§6Navigator").itemStack());
-        player.getInventory().setItem(5, new ItemBuilder(Material.ENDER_CHEST).name("§6Cosmetics").itemStack());
-        player.getInventory().setItem(7, new ItemBuilder(Material.SKULL_ITEM, 1, 3).skullOwner(player.getName()).name("§6Profile").itemStack());
+        player.getInventory().setItem(1, new ItemBuilder(Material.MUSIC_DISC_PIGSTEP).name("§6GameModes").itemStack());
+        player.getInventory().setItem(5, new ItemBuilder(Material.BARREL).name("§6Cosmetics").itemStack());
+        player.getInventory().setItem(7, new ItemBuilder(Material.PLAYER_HEAD, 1, 3).skullOwner(player.getName()).name("§6Profile").itemStack());
         if (LobbySystem.getLobbySystem().getLocationInterface().getLocation("Spawn") != null) {
             player.teleport(LobbySystem.getLobbySystem().getLocationInterface().getLocation("Spawn"));
         }
@@ -49,7 +49,7 @@ public class ConnectionListener implements Listener {
             for (Player all : Bukkit.getOnlinePlayers()) {
                 player.showPlayer(LobbySystem.getLobbySystem(), all);
             }
-            player.getInventory().setItem(3, new ItemBuilder(Material.INK_SACK, 1, 0, DyeColor.LIME).name(lobbyLanguage.getPlayerVisiviltyItem()).itemStack());
+            player.getInventory().setItem(3, new ItemBuilder(Material.LIME_DYE, 1).name(lobbyLanguage.getPlayerVisiviltyItem()).itemStack());
         }
         if (sichtbarkeitsIntreface.getCurrentMode(uuid) == 1) {
             for (Player all : Bukkit.getOnlinePlayers()) {
@@ -59,7 +59,7 @@ public class ConnectionListener implements Listener {
                     player.showPlayer(LobbySystem.getLobbySystem(), all);
                 }
             }
-            player.getInventory().setItem(3, new ItemBuilder(Material.INK_SACK, 1, 0, DyeColor.PURPLE).name(lobbyLanguage.getPlayerVisiviltyItem()).itemStack());
+            player.getInventory().setItem(3, new ItemBuilder(Material.PURPLE_DYE).name(lobbyLanguage.getPlayerVisiviltyItem()).itemStack());
         }
         if (sichtbarkeitsIntreface.getCurrentMode(uuid) == 2) {
             for (Player all : Bukkit.getOnlinePlayers()) {
@@ -67,7 +67,7 @@ public class ConnectionListener implements Listener {
                     player.hidePlayer(LobbySystem.getLobbySystem(), all);
                 }
             }
-            player.getInventory().setItem(3, new ItemBuilder(Material.INK_SACK, 1, 0, DyeColor.RED).name(lobbyLanguage.getPlayerVisiviltyItem()).itemStack());
+            player.getInventory().setItem(3, new ItemBuilder(Material.RED_DYE).name(lobbyLanguage.getPlayerVisiviltyItem()).itemStack());
         }
         player.setPlayerWeather(WeatherType.CLEAR);
         playerInterface.checkIfFirstJoin(player.getUniqueId());

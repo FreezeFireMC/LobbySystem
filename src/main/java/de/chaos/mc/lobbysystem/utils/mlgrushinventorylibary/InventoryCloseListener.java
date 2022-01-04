@@ -20,7 +20,7 @@ public class InventoryCloseListener implements Listener {
     @EventHandler
     public void onInventoryClosing(InventoryCloseEvent event) {
         Player player = (Player) event.getPlayer();
-        if (event.getInventory().getName().equalsIgnoreCase(GermanMLGRushTranslations.INVNAME.getTranslation()) || event.getInventory().getName().equalsIgnoreCase(EnglishMLGRushITranslations.INVNAME.getTranslation()) || event.getInventory().getName().equalsIgnoreCase(FrenchMLGRushTranslations.INVNAME.getTranslation())) {
+        if (event.getView().getTitle().equalsIgnoreCase(GermanMLGRushTranslations.INVNAME.getTranslation()) || event.getView().getTitle().equalsIgnoreCase(EnglishMLGRushITranslations.INVNAME.getTranslation()) || event.getView().getTitle().equalsIgnoreCase(FrenchMLGRushTranslations.INVNAME.getTranslation())) {
             sortingInterface.updateSorting(player, event.getInventory());
             player.sendMessage(getClosingMessage(player));
         }

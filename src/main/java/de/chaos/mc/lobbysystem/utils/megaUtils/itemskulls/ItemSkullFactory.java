@@ -3,8 +3,8 @@ package de.chaos.mc.lobbysystem.utils.megaUtils.itemskulls;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.mojang.authlib.properties.PropertyMap;
-import org.apache.commons.codec.binary.Base64;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.libs.org.codehaus.plexus.util.Base64;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -22,7 +22,7 @@ public class ItemSkullFactory {
         PropertyMap propertyMap = profile.getProperties();
         byte[] encodedData = base64.encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", url).getBytes());
         propertyMap.put("textures", new Property("textures", new String(encodedData)));
-        ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+        ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
         ItemMeta headMeta = head.getItemMeta();
         Class<?> headMetaClass = headMeta.getClass();
         itemSkullReflections.getField(headMetaClass, "profile", GameProfile.class).set(headMeta, profile);
@@ -36,7 +36,7 @@ public class ItemSkullFactory {
 	}
 	
 	public ItemStack getPlayerSkull(String name, String displayName, String... lore) {
-        ItemStack itemStack = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+        ItemStack itemStack = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
         SkullMeta meta = (SkullMeta) itemStack.getItemMeta();
         meta.setOwner(name);
         

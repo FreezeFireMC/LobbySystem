@@ -35,15 +35,15 @@ public class ProfileInventorys {
    public void getMainInventory(Player player) {
        Menu menu = menuFactory.createMenu(45, "§6Profile");
        // Glass at the sides
-       menu.additem(0, new ItemBuilder(Material.THIN_GLASS, 1, 7, DyeColor.GRAY).name("").itemStack(), null);
-       menu.additem(1, new ItemBuilder(Material.THIN_GLASS, 1, 7, DyeColor.GRAY).name("").itemStack(), null);
-       menu.additem(2, new ItemBuilder(Material.THIN_GLASS, 1, 7, DyeColor.GRAY).name("").itemStack(), null);
-       menu.additem(3, new ItemBuilder(Material.THIN_GLASS, 1, 7, DyeColor.GRAY).name("").itemStack(), null);
-       menu.additem(4, new ItemBuilder(Material.THIN_GLASS, 1, 7, DyeColor.GRAY).name("").itemStack(), null);
-       menu.additem(5, new ItemBuilder(Material.THIN_GLASS, 1, 7, DyeColor.GRAY).name("").itemStack(), null);
-       menu.additem(6, new ItemBuilder(Material.THIN_GLASS, 1, 7, DyeColor.GRAY).name("").itemStack(), null);
-       menu.additem(7, new ItemBuilder(Material.THIN_GLASS, 1, 7, DyeColor.GRAY).name("").itemStack(), null);
-       menu.additem(8, new ItemBuilder(Material.THIN_GLASS, 1, 7, DyeColor.GRAY).name("").itemStack(), null);
+       menu.additem(0, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).name("").itemStack(), null);
+       menu.additem(1, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).name("").itemStack(), null);
+       menu.additem(2, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).name("").itemStack(), null);
+       menu.additem(3, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).name("").itemStack(), null);
+       menu.additem(4, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).name("").itemStack(), null);
+       menu.additem(5, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).name("").itemStack(), null);
+       menu.additem(6, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).name("").itemStack(), null);
+       menu.additem(7, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).name("").itemStack(), null);
+       menu.additem(8, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).name("").itemStack(), null);
 
        // SubMenus
        menu.addSubmenu(10, new ItemBuilder(Material.CHEST).name(this.getInvName(player)).itemStack(), getSortingInventorys(player));

@@ -20,7 +20,6 @@ import de.chaos.mc.lobbysystem.utils.profile.ProfileInventorys;
 import de.chaos.mc.lobbysystem.utils.scorebaord.ScoreboardManager;
 import de.chaos.mc.lobbysystem.utils.sichtbarkeitsutils.SichtbarkeitsInterface;
 import de.chaos.mc.lobbysystem.utils.sichtbarkeitsutils.SichtbarkeitsRepository;
-import de.chaos.mc.lobbysystem.utils.worldutils.RedStoneLampLiter;
 import de.chaos.mc.serverapi.api.ServerAPI;
 import de.chaos.mc.serverapi.utils.playerlibary.languageLibary.LanguageInterface;
 import lombok.Getter;
@@ -41,7 +40,6 @@ public class LobbySystem extends JavaPlugin {
     public static SichtbarkeitsInterface sichtbarkeitsIntreface;
     private SichtbarkeitsRepository sichtbarkeitsRepository;
     private ScoreboardManager scoreboardManager;
-    private RedStoneLampLiter redStoneLampLiter;
     @Getter private UpdateMLGRushInventorySortingInterface updateInventorySortingInterface;
     private UpdateMLGRushInvSortingRepository updateInvSortingRepository;
     @Getter private MLGRushProfileInv mlgRushProfileInv;
@@ -79,18 +77,15 @@ public class LobbySystem extends JavaPlugin {
         playerInterface = new PlayerRepository(connectionSource);
 
         getCommand("setLocation").setExecutor(new SetLocationCommand());
-        getCommand("setLanguageHolo").setExecutor(new setLanguageHologramCommand(languageInterface, this));
 
         registerEvent(new ConnectionListener(playerInterface, scoreboardManager));
         registerEvent(new ClickListener(profileInventorys));
         registerEvent(new DoubleJumpListener());
         registerEvent(new EventListener());
-        registerEvent(new PlayerInteractListener());
         registerEvent(new PlayerMoveListener());
         registerEvent(new EntityInteractEntitiyListener());
         registerEvent(new InventoryClickListener(updateInventorySortingInterface));
         registerEvent(new InventoryCloseListener(updateInventorySortingInterface, languageInterface));
-        redStoneLampLiter = new RedStoneLampLiter(Bukkit.getWorld("world"), this);
     }
 
     public void registerEvent(Listener listener) {
@@ -103,7 +98,6 @@ public class LobbySystem extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        redStoneLampLiter.getRunnable().cancel();
     }
 
     public static ServerAPI getServerAPI() {
