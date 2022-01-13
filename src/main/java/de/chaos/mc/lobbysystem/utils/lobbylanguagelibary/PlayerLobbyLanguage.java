@@ -19,4 +19,7 @@ public class PlayerLobbyLanguage {
     public String languageUpdated;
     public String languageInv;
     public String visibilityItem;
+
+    // Settings
+    public String settingsInv;
 }

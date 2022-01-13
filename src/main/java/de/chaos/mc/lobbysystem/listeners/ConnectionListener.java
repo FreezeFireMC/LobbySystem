@@ -43,6 +43,7 @@ public class ConnectionListener implements Listener {
         player.setFlying(false);
 
         LobbySystem.getLobbySystem().getUpdateInventorySortingInterface().checkIfFirstJoin(player.getUniqueId());
+        LobbySystem.getLobbySystem().getFreezeFightInventorySortingInterface().checkIfFirstJoin(player.getUniqueId());
 
         PlayerLobbyLanguage lobbyLanguage = LobbySystem.getOnlinePlayers().get(player.getUniqueId());
         if (sichtbarkeitsIntreface.getCurrentMode(uuid) == 0) {

@@ -14,25 +14,25 @@ import java.util.UUID;
 
 public class ItemSkullFactory {
 
-	private final Base64 base64 = new Base64();
-	Reflections itemSkullReflections = new Reflections();
-	
+        private final Base64 base64 = new Base64();
+        Reflections itemSkullReflections = new Reflections();
+
 	public ItemStack createItemSkull(String url, String displayName, String... lore) {
-		GameProfile profile = new GameProfile(UUID.randomUUID(), UUID.randomUUID().toString());
-        PropertyMap propertyMap = profile.getProperties();
-        byte[] encodedData = base64.encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", url).getBytes());
-        propertyMap.put("textures", new Property("textures", new String(encodedData)));
-        ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
-        ItemMeta headMeta = head.getItemMeta();
-        Class<?> headMetaClass = headMeta.getClass();
-        itemSkullReflections.getField(headMetaClass, "profile", GameProfile.class).set(headMeta, profile);
-        
-        headMeta.setDisplayName(displayName);
-        headMeta.setLore(Arrays.asList(lore));
-        
-        head.setItemMeta(headMeta);
-		
-		return head;
+            GameProfile profile = new GameProfile(UUID.randomUUID(), UUID.randomUUID().toString());
+            PropertyMap propertyMap = profile.getProperties();
+            byte[] encodedData = base64.encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", url).getBytes());
+            propertyMap.put("textures", new Property("textures", new String(encodedData)));
+            ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
+            ItemMeta headMeta = head.getItemMeta();
+            Class<?> headMetaClass = headMeta.getClass();
+            itemSkullReflections.getField(headMetaClass, "profile", GameProfile.class).set(headMeta, profile);
+
+            headMeta.setDisplayName(displayName);
+            headMeta.setLore(Arrays.asList(lore));
+
+            head.setItemMeta(headMeta);
+
+            return head;
 	}
 	
 	public ItemStack getPlayerSkull(String name, String displayName, String... lore) {
