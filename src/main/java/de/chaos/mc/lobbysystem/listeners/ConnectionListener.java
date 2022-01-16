@@ -8,7 +8,9 @@ import de.chaos.mc.lobbysystem.utils.scorebaord.ScoreboardManager;
 import de.chaos.mc.lobbysystem.utils.sichtbarkeitsutils.SichtbarkeitsInterface;
 import de.chaos.mc.lobbysystem.utils.stringUtils.Permissions;
 import de.chaos.mc.serverapi.utils.stringLibary.AbstractMessages;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.*;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -45,6 +47,12 @@ public class ConnectionListener implements Listener {
         LobbySystem.getLobbySystem().getUpdateInventorySortingInterface().checkIfFirstJoin(player.getUniqueId());
         LobbySystem.getLobbySystem().getFreezeFightInventorySortingInterface().checkIfFirstJoin(player.getUniqueId());
 
+        String name = "%LanguageHolo_name%";
+        ArmorStand armorStand = LobbySystem.getLanguageHolo();
+        armorStand.setCustomName(PlaceholderAPI.setPlaceholders(player, name));
+        armorStand.setCustomNameVisible(true);
+        armorStand.setVisible(false);
+
         PlayerLobbyLanguage lobbyLanguage = LobbySystem.getOnlinePlayers().get(player.getUniqueId());
         if (sichtbarkeitsIntreface.getCurrentMode(uuid) == 0) {
             for (Player all : Bukkit.getOnlinePlayers()) {
@@ -73,6 +81,8 @@ public class ConnectionListener implements Listener {
         player.setPlayerWeather(WeatherType.CLEAR);
         playerInterface.checkIfFirstJoin(player.getUniqueId());
         scoreboardManager.getScorebaord(player);
+
+
     }
 
     @EventHandler

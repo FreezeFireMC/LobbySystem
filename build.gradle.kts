@@ -44,10 +44,14 @@ repositories {
     maven {
         url = uri("https://libraries.minecraft.net/")
     }
+    maven { url = uri ("https://repo.dmulloy2.net/repository/public/") }
+    maven {
+        url = uri ("https://repo.extendedclip.com/content/repositories/placeholderapi/")
+    }
+
 }
 
 dependencies {
-    api(fileTree("C:/Users/caosk/Desktop/ServerAPI"))
     implementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")
     implementation("org.projectlombok:lombok:1.18.22")
     annotationProcessor("org.projectlombok:lombok:1.18.22")
@@ -60,6 +64,10 @@ dependencies {
     compileOnly("eu.thesimplecloud.simplecloud:simplecloud-api:2.3.0")
     compileOnly("eu.thesimplecloud.simplecloud:simplecloud-plugin:2.3.0")
     compileOnly("dev.jcsoftware:JScoreboards:2.1.4-RELEASE")
+    api(fileTree("C:/Users/caosk/Desktop/ServerAPI"))
+    compileOnly("com.comphenix.protocol:ProtocolLib:4.7.0")
+    compileOnly("me.clip:placeholderapi:2.11.1")
+
 }
 
 group = "de.chaos.mc"

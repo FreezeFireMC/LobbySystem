@@ -13,7 +13,9 @@ import de.chaos.mc.lobbysystem.utils.invsortings.mlgrushinventorysorting.itemnam
 import de.chaos.mc.lobbysystem.utils.scorebaord.ScoreboardManager;
 import de.chaos.mc.serverapi.utils.playerlibary.languageLibary.LanguageInterface;
 import de.chaos.mc.serverapi.utils.playerlibary.languageLibary.LanguageType;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Material;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -81,6 +83,11 @@ public class ProfileInventorys {
             player1.sendMessage(LobbySystem.getOnlinePlayers().get(player1.getUniqueId()).getLanguageUpdated());
             scoreboardManager.switchBoard(player1, LanguageType.EG);
 
+            String name = "%LanguageHolo_name%";
+            ArmorStand armorStand = LobbySystem.getLanguageHolo();
+            armorStand.setCustomName(PlaceholderAPI.setPlaceholders(player, name));
+            armorStand.setCustomNameVisible(true);
+            armorStand.setVisible(false);
         });
         menu.additem(13, new ItemSkullFactory().createItemSkull("http://textures.minecraft.net/texture/5e7899b4806858697e283f084d9173fe487886453774626b24bd8cfecc77b3f", "§6Deutsch", "Deutschland"), player1 -> {
             languageInterface.setLanguageType(player1.getUniqueId(), LanguageType.DE);
@@ -88,6 +95,12 @@ public class ProfileInventorys {
             LobbySystem.getLobbySystem().getStringsLoader().getPlayerLobbyLanguage(player1.getUniqueId());
             player1.sendMessage(LobbySystem.getOnlinePlayers().get(player1.getUniqueId()).getLanguageUpdated());
             scoreboardManager.switchBoard(player1, LanguageType.DE);
+
+            String name = "%LanguageHolo_name%";
+            ArmorStand armorStand = LobbySystem.getLanguageHolo();
+            armorStand.setCustomName(PlaceholderAPI.setPlaceholders(player, name));
+            armorStand.setCustomNameVisible(true);
+            armorStand.setVisible(false);
         });
         return menu;
     }

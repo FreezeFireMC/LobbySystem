@@ -1,6 +1,7 @@
 package de.chaos.mc.lobbysystem.utils;
 
 import de.chaos.mc.lobbysystem.LobbySystem;
+import de.chaos.mc.lobbysystem.utils.cosmetics.BannerMenu;
 import de.chaos.mc.lobbysystem.utils.megaUtils.menu.Menu;
 import de.chaos.mc.lobbysystem.utils.stringUtils.Permissions;
 import de.chaos.mc.serverapi.ServerAPIBukkitMain;
@@ -52,7 +53,7 @@ public class LobbyInventorys {
         Menu menu = LobbySystem.menuFactory.createMenu(3*9, "§6Cosmetics");
         menu.addSubmenu(10, new ItemBuilder(Material.BLAZE_POWDER).name("§6Particles").itemStack(), getParticlesMenu(player));
         menu.addSubmenu(12, new ItemBuilder(Material.ENCHANTING_TABLE).name("§6Cloaks").itemStack(), getCloaksMenu(player));
-        menu.addSubmenu(14,  new ItemBuilder(Material.BLACK_BANNER).name("§6Banners").itemStack(), getBannersMenu(player));
+        menu.additem(14, new ItemBuilder(Material.BLACK_BANNER).name("§6Banners").itemStack(), LobbyInventorys::getBannerMenu);
         menu.addSubmenu(16,new ItemBuilder(Material.PLAYER_HEAD).skullOwner("ChaosNeko").name("§6Heads").itemStack(), getHeadsMenu(player));
 
 
@@ -62,10 +63,10 @@ public class LobbyInventorys {
     public static Menu getParticlesMenu(Player player) {
         return null;
     }
-    public static Menu getCloaksMenu(Player player) {
-        return null;
+    public static void getBannerMenu(Player player) {
+        new BannerMenu(LobbySystem.menuFactory, player);
     }
-    public static Menu getBannersMenu(Player player) {
+    public static Menu getCloaksMenu(Player player) {
         return null;
     }
     public static Menu getHeadsMenu(Player player) {
